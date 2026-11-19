@@ -1,0 +1,2 @@
+# Minimal runtime dependency. Use company-approved pinned lock/mirror before deployment.
+cryptography>=42,<48

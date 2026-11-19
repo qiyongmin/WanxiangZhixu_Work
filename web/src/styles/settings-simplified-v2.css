@@ -1,0 +1,74 @@
+/* KB_Work Settings V2: one full-width, compact, direct Settings workspace.
+ * About is first; all seven build metadata fields are immediately visible.
+ * No right inspector, shortcut reference table or Work Data Integrity card. */
+.settings-single-page{max-width:1420px;margin-inline:auto;width:100%;min-width:0;padding:var(--sp-4) clamp(12px,2vw,28px)}
+.settings-page-heading{display:flex;align-items:center;justify-content:space-between;margin:0 0 var(--sp-4)}
+.settings-page-heading h1{font-size:var(--fs-title);margin:var(--sp-1) 0}
+.settings-page-heading p{margin:0;font-size:var(--fs-compact)}
+.settings-kicker,.settings-section-kicker{font-size:var(--fs-compact);letter-spacing:.11em;
+  color:var(--accent-text);font-weight:800}
+.settings-about-card,.settings-appearance-card{border:1px solid var(--border);
+  border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);
+  background:var(--surface);padding:var(--sp-4);margin:0 0 var(--sp-3)}
+.settings-about-card .settings-about-header{margin:var(--sp-2) 0 var(--sp-3);
+ display:flex;align-items:center;gap:var(--sp-3)}
+.settings-about-card .settings-about-header img{width:57px;height:57px;object-fit:contain}
+.settings-about-card .settings-about-header h2{font-size:var(--fs-h2);font-weight:850;margin:0}
+.settings-about-card .settings-about-header p{margin:var(--sp-1) 0 0}
+.settings-about-card .settings-about-details{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--sp-2)}
+.settings-about-card .settings-about-details>div{display:flex;flex-direction:column;gap:var(--sp-1);
+  border:1px solid var(--border-soft);border-radius:var(--radius);
+  padding:var(--sp-2) var(--sp-3);background:var(--bg-subtle);min-width:0}
+.settings-about-card .settings-about-details dt{font-size:var(--fs-compact);color:var(--text-muted)}
+.settings-about-card .settings-about-details dd{font-size:var(--fs-body);font-weight:650;overflow-wrap:anywhere}
+.settings-section-title{display:flex;align-items:center;gap:var(--sp-3);margin:0 0 var(--sp-3)}
+.settings-section-title h2{margin:0;font-size:var(--fs-h2)}
+.settings-section-title p{margin:var(--sp-1) 0 0;font-size:var(--fs-compact)}
+.settings-theme-line,.settings-style-row{display:flex;align-items:center;gap:var(--sp-3);min-width:0;flex-wrap:wrap}
+.settings-theme-line{border-bottom:1px solid var(--border);padding:0 0 var(--sp-3);margin:0 0 var(--sp-3)}
+.settings-control-caption{flex:0 0 100px;font-weight:750;font-size:var(--fs-compact)}
+.settings-theme-options,.settings-style-options{display:flex;align-items:center;flex-wrap:wrap;gap:var(--sp-2);min-width:0}
+.settings-theme-choice{display:flex;align-items:center;gap:var(--sp-2);border:1px solid var(--border);
+ border-radius:var(--radius-pill);padding:var(--sp-2) var(--sp-3);font-size:var(--fs-compact);
+ color:var(--text-muted);background:var(--surface);cursor:pointer;min-height:36px}
+.settings-theme-choice.is-active{color:var(--accent-text);border-color:var(--accent);background:var(--accent-bg)}
+.settings-theme-choice input{accent-color:var(--accent)}
+.settings-style-choice{display:flex;align-items:center;gap:var(--sp-2);
+ min-height:45px;min-width:130px;padding:var(--sp-1) var(--sp-2);
+ border:1px solid var(--border);border-radius:var(--radius);
+ background:var(--bg-subtle);font-weight:700;font-size:var(--fs-compact);
+ cursor:pointer;color:var(--text)}
+.settings-style-choice.is-active{border-color:var(--accent);background:var(--accent-bg);color:var(--accent-text)}
+.settings-style-choice .visual-style-swatch{width:48px;height:32px;flex:0 0 48px;
+  border-radius:var(--radius);background-size:cover;background-position:center}
+.settings-style-choice input{width:15px;height:15px;accent-color:var(--accent)}
+.settings-style-choice>svg{margin-inline-start:auto}
+.settings-extra-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--sp-3);margin-bottom:var(--sp-3)}
+.settings-extra-card{min-width:0;padding:var(--sp-3) var(--sp-4);
+ background:var(--surface);border:1px solid var(--border);
+ border-radius:var(--radius-lg);box-shadow:var(--shadow-sm)}
+.settings-extra-card>.settings-group{border:0;margin:0;padding:0;min-width:0;box-shadow:none}
+.settings-extra-card h2{margin:0 0 var(--sp-2);font-size:var(--fs-h2)}
+.settings-extra-card p{margin:0 0 var(--sp-2);font-size:var(--fs-compact);line-height:1.5}
+.settings-admin-list{display:grid;gap:var(--sp-2)}
+.settings-admin-disclosure{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.settings-admin-disclosure>summary{display:flex;align-items:center;gap:var(--sp-3);min-height:53px;padding:var(--sp-3) var(--sp-4);
+  cursor:pointer;font-weight:750;list-style:none}
+.settings-admin-disclosure>summary::-webkit-details-marker{display:none}
+.settings-admin-disclosure>summary svg:last-child{margin-inline-start:auto;transition:transform var(--dur-base)}
+.settings-admin-disclosure[open]>summary svg:last-child{transform:rotate(180deg)}
+.settings-admin-disclosure[open]>summary{background:var(--bg-subtle);border-bottom:1px solid var(--border)}
+.settings-admin-disclosure>.settings-group{border:0;border-radius:0;box-shadow:none;margin:0;padding:var(--sp-4)}
+@media(max-width:900px){
+ .settings-about-card .settings-about-details{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .settings-style-choice{min-width:115px}
+}
+@media(max-width:600px){
+ .settings-single-page{padding:var(--sp-3)}
+ .settings-about-card .settings-about-details{grid-template-columns:1fr}
+ .settings-about-card,.settings-appearance-card{padding:var(--sp-3)}
+ .settings-control-caption{flex:1 1 100%}
+ .settings-extra-grid{grid-template-columns:1fr}
+ .settings-style-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%}
+ .settings-style-choice{min-width:0}
+}

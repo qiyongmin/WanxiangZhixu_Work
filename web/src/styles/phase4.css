@@ -1,0 +1,91 @@
+/* Phase 4：Section 管理、File Hub 管理页、备份 / 验证 / 切换。仅通过 var(--…) 取值。 */
+.section-add {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--sp-3);
+}
+.section-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.section-list > * + * {
+  margin-top: var(--sp-2);
+}
+.section-row {
+  padding: var(--sp-3);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.section-main,
+.section-actions,
+.section-edit,
+.row-actions,
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2);
+}
+.section-actions {
+  margin-top: var(--sp-2);
+}
+.section-position {
+  min-width: 2ch;
+  color: var(--text-muted);
+}
+.switch-row {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+.rule-violations {
+  margin-top: var(--sp-2);
+}
+.table-scroll {
+  overflow-x: auto;
+}
+.file-table .sha {
+  display: inline-block;
+  max-width: 24ch;
+  overflow-wrap: anywhere;
+  font-size: var(--fs-compact);
+}
+.ref-list {
+  margin: 0;
+  padding-inline-start: var(--sp-4);
+}
+.file-history {
+  padding: var(--sp-3);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--bg-subtle);
+}
+.checklist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.checklist > li {
+  padding: var(--sp-1) 0;
+}
+.check-status {
+  display: inline-block;
+  min-width: 5ch;
+  padding: 0 var(--sp-2);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+}
+.checklist [data-status='pass'] .check-status {
+  color: var(--st-progress-fg);
+  background: var(--st-progress-bg);
+}
+.checklist [data-status='fail'] .check-status {
+  color: var(--st-blocked-fg);
+  background: var(--st-blocked-bg);
+}
+.verify-report {
+  margin-top: var(--sp-2);
+}

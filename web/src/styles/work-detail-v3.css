@@ -1,0 +1,218 @@
+/* KB_Work Focus / Materials / Notes refinements V3.1.
+   KBW theme variables only, no untrusted document CSS in the host DOM. */
+
+/* Drag handles live over the existing 3-column frame. Do not add a grid column
+   and never squeeze the main scroll pane via a phantom separator. */
+.app-shell { position: relative; }
+.pane-resizer {
+  position: absolute;
+  z-index: 45;
+  top: var(--toolbar-h);
+  bottom: var(--sp-2);
+  width: 12px;
+  padding: 0;
+  touch-action: none;
+  cursor: col-resize;
+  outline-offset: -2px;
+  border-radius: var(--radius-pill);
+  background: transparent;
+}
+.pane-resizer-left { left: calc(var(--left-w) - 6px); }
+.pane-resizer-right { right: calc(var(--right-w) - 6px); }
+.pane-resizer::after {
+  content: "";
+  display: block;
+  width: 3px;
+  height: 100%;
+  margin-inline: auto;
+  border-radius: var(--radius-pill);
+  background: var(--border);
+  opacity: .36;
+  transition: opacity var(--dur-base), background var(--dur-base);
+}
+.pane-resizer:hover::after, .pane-resizer:focus-visible::after,
+.pane-resizer:active::after { opacity: 1; background: var(--accent); }
+.pane-resizer:focus-visible { outline: 2px solid var(--focus-ring); }
+.pane-inner-left { min-width: 0; }
+.pane-inner-left .tree-label { min-width: 0; }
+@media (max-width: 1179px) { .pane-resizer { display: none; } }
+
+/* Materials: embedded document belongs to the main view, not a floating modal. */
+.materials-inline-workspace { min-width: 0; }
+.materials-inline-preview {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: var(--sp-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+.materials-preview-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--sp-2);
+}
+.materials-preview-head h2 {
+  font-size: var(--fs-h2);
+  line-height: 1.35;
+  margin: var(--sp-1) 0 0;
+  overflow-wrap: anywhere;
+}
+.materials-preview-head .muted {
+  font-weight: 700;
+  letter-spacing: .055em;
+  font-size: var(--fs-compact);
+}
+.materials-inline-preview .preview-stage { min-width: 0; min-height: 70vh; }
+.materials-inline-preview .preview-frame {
+  min-height: 74vh;
+  height: 74vh;
+  max-width: 100%;
+}
+.materials-inline-preview .preview-image {
+  display: block; width: auto; height: auto; max-height: 72vh; object-fit: contain;
+  margin-inline: auto;
+}
+.materials-inline-preview .preview-extracted .preview-text { max-height: 73vh; }
+.materials-inline-preview .preview-stage.is-maximized .preview-frame { min-height: 0; height: 100%; }
+.materials-tab .material-list { min-width: 0; }
+@media (max-width: 780px) {
+  .materials-inline-preview { padding: var(--sp-2); }
+  .materials-preview-head h2 { font-size: var(--fs-body); }
+  .materials-inline-preview .preview-frame { min-height: 72dvh; height: 72dvh; }
+}
+
+/* Multi Notes: clear visual separation with a bold inline-editable title.
+   Keep only one title input per Note and retain the exact Note ID and order. */
+.note-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+.note-list > * + * { margin-top: 0; }
+.note-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-inline-start: 4px solid var(--accent);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+.note-card:nth-child(3n+2) {
+  border-inline-start-color: var(--st-done-fg);
+  background: color-mix(in srgb, var(--st-done-bg) 20%, var(--surface));
+}
+.note-card:nth-child(3n+3) {
+  border-inline-start-color: var(--st-waiting-fg);
+  background: color-mix(in srgb, var(--st-waiting-bg) 20%, var(--surface));
+}
+.note-card:focus-within { box-shadow: var(--shadow-md); }
+.note-card .note-head {
+  display: flex; align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-3);
+  border-bottom: 1px solid var(--border);
+  background: transparent;
+  min-width: 0;
+  flex-wrap: wrap;
+}
+.note-ordinal {
+  padding: 2px var(--sp-2);
+  border-radius: var(--radius);
+  color: var(--accent-text);
+  background: var(--accent-bg);
+  font-weight: 800;
+  letter-spacing: .065em;
+  font-size: var(--fs-compact);
+  flex: 0 0 auto;
+}
+.note-card:nth-child(3n+2) .note-ordinal {
+  color: var(--st-done-fg); background: var(--st-done-bg);
+}
+.note-card:nth-child(3n+3) .note-ordinal {
+  color: var(--st-waiting-fg); background: var(--st-waiting-bg);
+}
+.note-title-label {
+  flex: 1 1 230px;
+  min-width: 0;
+}
+.note-card .note-title-input {
+  min-width: 0; width: 100%;
+  padding: var(--sp-1) var(--sp-2);
+  background: transparent;
+  color: var(--text);
+  font-weight: 750;
+  font-size: var(--fs-h2);
+  line-height: 1.3;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+}
+.note-card .note-title-input:hover { border-color: var(--border); }
+.note-card .note-title-input:focus-visible { border-color: var(--accent); background: var(--surface); }
+.note-card .note-toggle {
+  flex: 0 0 auto;
+  min-width: 36px;
+  min-height: 36px;
+  justify-content: center;
+  font-size: var(--fs-body);
+}
+.note-card .note-body { padding: var(--sp-3) var(--sp-4); }
+.note-card .note-editor {
+  line-height: 1.65;
+  min-height: 8rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.note-card .note-title-error { margin: 0; padding: var(--sp-1) var(--sp-4); }
+.note-color-control { margin-left: auto; min-width: 116px; }
+.note-color-control select { min-height: 36px; width: 100%; }
+.note-editor .note-color-default, .summary-html .note-color-default { color: var(--text); }
+.note-editor .note-color-blue, .summary-html .note-color-blue { color: var(--accent-text); }
+.note-editor .note-color-green, .summary-html .note-color-green { color: var(--st-done-fg); }
+.note-editor .note-color-red, .summary-html .note-color-red { color: var(--st-blocked-fg); }
+.note-editor .note-color-amber, .summary-html .note-color-amber { color: var(--st-waiting-fg); }
+.note-editor .note-color-purple, .summary-html .note-color-purple { color: var(--note-purple-fg); }
+.focus-note-index {
+  display: flex; align-items: center; flex-wrap: wrap;
+  gap: var(--sp-2); padding: var(--sp-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg-subtle);
+}
+.focus-note-choice {
+  display: inline-flex; align-items: center; gap: var(--sp-2);
+  max-width: min(100%, 300px);
+  min-height: 38px;
+  padding: var(--sp-2) var(--sp-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis;
+}
+.focus-note-choice.is-active {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+  color: var(--accent-text);
+}
+.note-index-number {
+  display: inline-grid; place-items: center;
+  color: var(--text-muted);
+  font-size: var(--fs-compact);
+}
+@media (max-width: 780px) {
+  .note-card .note-head { gap: var(--sp-1); padding: var(--sp-2); }
+  .note-card .note-title-input { font-size: var(--fs-body); }
+  .note-card .note-body { padding: var(--sp-2); }
+  .note-card .note-toggle, .note-color-control select { min-height: 44px; }
+  .note-color-control { flex: 1 1 100%; }
+}

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="250" viewBox="0 0 1280 250" preserveAspectRatio="xMidYMid slice">
+<defs>
+  <linearGradient id="wave1" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#a5abf5" stop-opacity=".02"/><stop offset=".48" stop-color="#8b94ef" stop-opacity=".35"/><stop offset="1" stop-color="#dd9ee2" stop-opacity=".28"/></linearGradient>
+  <linearGradient id="wave2" x1="1" y1="0" x2="0" y2="1"><stop stop-color="#cdb3f9" stop-opacity=".52"/><stop offset=".48" stop-color="#b4d5f9" stop-opacity=".23"/><stop offset="1" stop-color="#edf1ff" stop-opacity="0"/></linearGradient>
+  <radialGradient id="halo"><stop stop-color="#eac1f5" stop-opacity=".33"/><stop offset=".7" stop-color="#a6bbf9" stop-opacity=".12"/><stop offset="1" stop-color="#a6bbf9" stop-opacity="0"/></radialGradient>
+  <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1"><stop stop-color="white" stop-opacity="1"/><stop offset="1" stop-color="white" stop-opacity="0"/></linearGradient>
+  <mask id="soft"><rect width="1280" height="250" fill="url(#fade)"/></mask>
+</defs>
+<g mask="url(#soft)">
+<ellipse cx="990" cy="58" rx="370" ry="165" fill="url(#halo)"/>
+<path d="M250 40C495 135 675-50 930 28s277 32 350-25v155C1050 82 810 196 615 123 470 72 382 158 250 103Z" fill="url(#wave1)"/>
+<path d="M420 0C580 82 675 14 820 64s260 62 460-28v116C1065 218 970 84 808 121 676 152 558 63 420 92Z" fill="url(#wave2)"/>
+<path d="M525 0C774 132 940-20 1280 79" fill="none" stroke="#e7e1ff" stroke-width="2" opacity=".45"/>
+<g fill="#f9f9ff" opacity=".73"><circle cx="624" cy="27" r="2.3"/><circle cx="856" cy="48" r="1.6"/><circle cx="1036" cy="30" r="2"/><circle cx="1174" cy="91" r="2"/><circle cx="754" cy="110" r="1.4"/></g>
+</g></svg>

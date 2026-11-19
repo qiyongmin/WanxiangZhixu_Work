@@ -1,0 +1,385 @@
+/* KBW UI tokens: independently maintained color, typography, space, surfaces and motion.
+ * All theme styles use these CSS variables, without a vendor design system.
+ * Light mode uses a calm neutral canvas and dark mode uses slate surfaces.
+ * Text, focus and status contrast must remain WCAG compliant. */
+:root {
+  --font-body: "Inter Variable", "Noto Sans SC Variable", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fs-body: 14px;       /* body text is 13–14px (Req 7.3) */
+  --fs-compact: 12px;    /* KBW compact label size */
+  --fs-title: 24px;
+  --fs-l1-title-min: 28px;
+  --fs-l1-title-max: 36px;
+  --fs-l1-title-mobile-min: 25px;
+  --fs-l1-title-mobile-max: 32px;
+  --fs-h2: 15px;
+  --fs-kpi: 28px;
+  --fs-brand: 20px;
+  --fs-brand-mobile: 17px;
+  --fs-tree-section: 16px;
+  --fs-clarity-title: 32px;
+  --fs-clarity-lane: 21px;
+  --fs-clarity-kpi: 33px;
+  --radius-clarity-panel: 18px;
+  --fs-tree-l1: 14px;
+  --fs-tree-l2: 13px;
+  --fs-tree-l3: 12px;
+  --fs-tree-l4: 12px;
+  --lh-body: 1.5;
+  --sp-1: 4px;           /* 4 / 8 px spacing scale */
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-6: 24px;
+  --radius: 8px;         /* inputs, buttons, menu items */
+  --radius-md: 10px;     /* chips tiles, cards inside panels */
+  --radius-lg: 12px;     /* panels, cards, popovers, dialogs */
+  --radius-pill: 999px;  /* tags, status chips, count chips */
+  --dur-fast: 100ms;     /* motion stays within 100–200ms (Req 7.8) */
+  --dur-base: 150ms;
+  --dur-slow: 200ms;
+  --left-w-open: 248px;
+  --right-w-open: 280px;
+  --toolbar-h: 48px;
+  --focus-width: 2px;
+  /* Quick Access icon palette: centralized, brand-recognizable self-hosted SVG */
+  --qa-penguin-ink: #232b3b;
+  --qa-penguin-eye: #242939;
+  --qa-penguin-white: #ffffff;
+  --qa-penguin-beak: #f9a526;
+  --qa-penguin-feet: #f8aa2f;
+  --qa-teams-lighter: #7b83e2;
+  --qa-teams-base: #6264a7;
+  --qa-teams-mid: #7779cc;
+  --qa-teams-dark: #5059a9;
+  --qa-teams-deep: #444b95;
+  --qa-sharepoint-base: #008e86;
+  --qa-sharepoint-light: #0fbaad;
+  --qa-sharepoint-deep: #057a78;
+  --qa-sharepoint-block: #037c79;
+  --qa-eridoc-base: #1d5b9b;
+  --qa-eridoc-fold: #6fb0ec;
+  --sec-gap: 8px;        /* gap between Section groups */
+}
+:root,
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f3f5f9;             /* canvas */
+  --surface: #ffffff;        /* elevated cards, panels, inputs */
+  --bg-subtle: #f8f9fc;      /* quiet tinted regions */
+  --bg-sunken: #eaeef5;      /* wells, column backgrounds */
+  --bg-hover: #e9eef7;
+  --border: #e1e6ef;         /* very low-contrast hairline (decorative structure only) */
+  --border-soft: #e8ecf4;
+  --border-strong: #7b869b;  /* component boundary that must be perceivable (>= 3:1) */
+  --text: #1a2030;
+  --text-muted: #586175;
+  --accent: #0f6fde;
+  --accent-hover: #0b5fc2;
+  --accent-contrast: #ffffff;
+  --accent-text: #0b5fc2;
+  --accent-bg: #e4eefc;
+  --focus-ring: #2a5bd7;
+  --shadow-sm: 0 1px 2px rgba(20, 30, 60, 0.06), 0 1px 3px rgba(20, 30, 60, 0.06);
+  --shadow-md: 0 4px 12px rgba(20, 30, 60, 0.1), 0 2px 4px rgba(20, 30, 60, 0.06);
+  --scrim: rgba(20, 30, 60, 0.35);
+  --sec-1: #1174e6;           /* Section accents: blue / green / orange / purple / gray / yellow (decorative, never the only cue) */
+  --sec-2: #329864;
+  --sec-3: #d46617;
+  --sec-4: #a56ebe;
+  --note-purple-fg: #77338f;
+  --qa-teams-soft-bg: #eeeff9;
+  --qa-sharepoint-soft-bg: #e9f7f4;
+  --sec-5: #878787;
+  --sec-6: #e0b300;
+  --kpi-red: #c4180d;
+  --kpi-orange: #a84e0a;
+  --dot-planned: #878787;
+  --dot-progress: #1174e6;
+  --dot-waiting: #e0b300;
+  --dot-blocked: #ed0e00;
+  --dot-done: #329864;
+  --st-planned-fg: #555555;
+  --st-planned-bg: #e6e9ef;
+  --st-progress-fg: #0b5cad;
+  --st-progress-bg: #dbe9f8;
+  --st-waiting-fg: #7a5b00;
+  --st-waiting-bg: #fdf0b8;
+  --st-blocked-fg: #b3170d;
+  --st-blocked-bg: #fbdcd9;
+  --st-done-fg: #1f6e44;
+  --st-done-bg: #d9f0e3;
+  /* Clarity Layers · selected Cockpit Overview skin (theme-aware) */
+  --clarity-attention-bg: #fff2f1;
+  --clarity-attention-fg: #b94450;
+  --clarity-follow-bg: #fff8e9;
+  --clarity-follow-fg: #946410;
+  --clarity-upcoming-bg: #effbf7;
+  --clarity-upcoming-fg: #147e6f;
+  /* Notes V3.5 table shades: semantic, theme-aware, no arbitrary inline styles. */
+  --note-table-blue: #e3edfe;
+  --note-table-green: #e0f2e6;
+  --note-table-amber: #fff0cb;
+  --note-table-rose: #fce3e9;
+  --note-table-purple: #f0e6ff;
+  --note-table-slate: #e9edf3;
+  --note-table-swatch-blue: #c5ddff;
+  --note-table-swatch-green: #c0eacb;
+  --note-table-swatch-amber: #ffe6ab;
+  --note-table-swatch-rose: #ffccd7;
+  --note-table-swatch-purple: #e9d5ff;
+  --note-table-swatch-slate: #ccd5df;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0e1320;
+  --surface: #171d2c;
+  --bg-subtle: #121827;
+  --bg-sunken: #0a0e18;
+  --bg-hover: #1f2740;
+  --border: #232b40;
+  --border-soft: #1d2539;
+  --border-strong: #7d89a3;
+  --text: #f1f4fb;
+  --text-muted: #9aa5bb;
+  --accent: #1a6ee0;
+  --accent-hover: #1560c6;
+  --accent-contrast: #ffffff;
+  --accent-text: #6cb0ff;
+  --accent-bg: #16315a;
+  --focus-ring: #8ab4ff;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 6px 16px rgba(0, 0, 0, 0.5), 0 2px 4px rgba(0, 0, 0, 0.35);
+  --scrim: rgba(0, 0, 0, 0.55);
+  --sec-1: #3b8cf0;
+  --sec-2: #34a873;
+  --sec-3: #ea7a2a;
+  --sec-4: #b57bd6;
+  --note-purple-fg: #dba4ed;
+  --qa-teams-soft-bg: #292b48;
+  --qa-sharepoint-soft-bg: #173b39;
+  --sec-5: #adadad;
+  --sec-6: #fad22d;
+  --kpi-red: #ff6b63;
+  --kpi-orange: #ff9a4d;
+  --dot-planned: #adadad;
+  --dot-progress: #3b8cf0;
+  --dot-waiting: #fad22d;
+  --dot-blocked: #ff5c52;
+  --dot-done: #34a873;
+  --st-planned-fg: #c9d0de;
+  --st-planned-bg: #2a3248;
+  --st-progress-fg: #6db4ff;
+  --st-progress-bg: #16315a;
+  --st-waiting-fg: #fad22d;
+  --st-waiting-bg: #3d3200;
+  --st-blocked-fg: #ff8a82;
+  --st-blocked-bg: #4a1512;
+  --st-done-fg: #5fd29a;
+  --st-done-bg: #12361f;
+  --clarity-attention-bg: #342127;
+  --clarity-attention-fg: #ff9ba8;
+  --clarity-follow-bg: #342d22;
+  --clarity-follow-fg: #f3c47b;
+  --clarity-upcoming-bg: #17342e;
+  --clarity-upcoming-fg: #7cddc3;
+  --note-table-blue: #203856;
+  --note-table-green: #203d32;
+  --note-table-amber: #4a3820;
+  --note-table-rose: #492a36;
+  --note-table-purple: #372a50;
+  --note-table-slate: #343b49;
+}
+:focus-visible {
+  outline: var(--focus-width) solid var(--focus-ring);
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0ms !important;
+    animation-duration: 0ms !important;
+  }
+  .is-progress-indicator {
+    animation-duration: initial !important;
+  }
+}
+
+/* Visual-only theme color tokens. Default leaves the existing palette unchanged. */
+
+:root[data-visual-style="mountains"][data-theme="light"] {
+  --bg: #eaf2ed;
+  --surface: #fcfefc;
+  --bg-subtle: #f1f8f3;
+  --bg-sunken: #e3eee6;
+  --bg-hover: #e4f1e9;
+  --border: #d6e5db;
+  --border-soft: #e1ece4;
+  --border-strong: #6c8877;
+  --text: #20392d;
+  --text-muted: #536e5d;
+  --accent: #286e51;
+  --accent-hover: #1f573e;
+  --accent-contrast: #ffffff;
+  --accent-text: #246248;
+  --accent-bg: #dcefe3;
+  --focus-ring: #256849;
+  --shadow-sm: 0 1px 3px #173b2710;
+  --shadow-md: 0 6px 18px #173b271a;
+  --sec-1: #3c8771;
+  --sec-2: #578c43;
+  --sec-3: #b77a3d;
+  --sec-4: #6f789d;
+  --sec-5: #73847a;
+  --sec-6: #b59a3a;
+  --style-art: url('/app/visual-themes/mountains.svg');
+  --style-glow: #9cccba55;
+}
+:root[data-visual-style="mountains"][data-theme="dark"] {
+  --bg: #10201a;
+  --surface: #1a2c25;
+  --bg-subtle: #182821;
+  --bg-sunken: #0e1b16;
+  --bg-hover: #274236;
+  --border: #2f493c;
+  --border-soft: #243c30;
+  --border-strong: #8cae9b;
+  --text: #eaf6ed;
+  --text-muted: #aacbb6;
+  --accent: #4cb790;
+  --accent-hover: #61c7a3;
+  --accent-contrast: #0a261a;
+  --accent-text: #85dfb9;
+  --accent-bg: #234f3f;
+  --focus-ring: #8be5c0;
+  --sec-1: #64bda0;
+  --sec-2: #9ab971;
+  --sec-3: #d0aa6a;
+  --sec-4: #a3a8d7;
+  --sec-5: #a5c0ae;
+  --sec-6: #dec783;
+  --style-art: url('/app/visual-themes/mountains.svg');
+  --style-glow: #4fae8450;
+}
+:root[data-visual-style="starship"][data-theme="light"] {
+  --bg: #e5edf8;
+  --surface: #fbfdff;
+  --bg-subtle: #f0f5fd;
+  --bg-sunken: #e0e9f6;
+  --bg-hover: #e0ecfc;
+  --border: #d5dfef;
+  --border-soft: #e3eaf5;
+  --border-strong: #6c839e;
+  --text: #1c2d47;
+  --text-muted: #526784;
+  --accent: #225bb5;
+  --accent-hover: #194886;
+  --accent-contrast: #ffffff;
+  --accent-text: #1a549f;
+  --accent-bg: #dceafd;
+  --focus-ring: #225bb5;
+  --shadow-sm: 0 1px 3px #1c335114;
+  --shadow-md: 0 6px 18px #1c33511e;
+  --sec-1: #3478cb;
+  --sec-2: #438c92;
+  --sec-3: #c5795b;
+  --sec-4: #7975b5;
+  --sec-5: #7487a4;
+  --sec-6: #b7a15d;
+  --style-art: url('/app/visual-themes/starship.svg');
+  --style-glow: #709ee755;
+}
+:root[data-visual-style="starship"][data-theme="dark"] {
+  --bg: #090f1d;
+  --surface: #121e33;
+  --bg-subtle: #17253c;
+  --bg-sunken: #070f1d;
+  --bg-hover: #213552;
+  --border: #273c58;
+  --border-soft: #1e3049;
+  --border-strong: #879fbd;
+  --text: #ecf3ff;
+  --text-muted: #a6bedc;
+  --accent: #5ca2ee;
+  --accent-hover: #83bdfd;
+  --accent-contrast: #09172b;
+  --accent-text: #9ccafe;
+  --accent-bg: #1d3f66;
+  --focus-ring: #b3d8ff;
+  --shadow-sm: 0 2px 6px #00000048;
+  --shadow-md: 0 8px 24px #00000060;
+  --sec-1: #69a9ef;
+  --sec-2: #6abbab;
+  --sec-3: #edaa83;
+  --sec-4: #b4a1ec;
+  --sec-5: #9ab3d1;
+  --sec-6: #e6cb86;
+  --style-art: url('/app/visual-themes/starship.svg');
+  --style-glow: #4569b957;
+}
+:root[data-visual-style="aurora"][data-theme="light"] {
+  --bg: #f1effc;
+  --surface: #fffefe;
+  --bg-subtle: #f8f6ff;
+  --bg-sunken: #eae6f8;
+  --bg-hover: #eae7fc;
+  --border: #e2dcf2;
+  --border-soft: #eeebf6;
+  --border-strong: #867ca4;
+  --text: #35304f;
+  --text-muted: #68627e;
+  --accent: #6953bd;
+  --accent-hover: #503d98;
+  --accent-contrast: #ffffff;
+  --accent-text: #624dae;
+  --accent-bg: #ebe5fd;
+  --focus-ring: #6550b2;
+  --shadow-sm: 0 1px 3px #48307511;
+  --shadow-md: 0 6px 18px #48307518;
+  --sec-1: #7770cf;
+  --sec-2: #579f9b;
+  --sec-3: #c47d93;
+  --sec-4: #a779c6;
+  --sec-5: #958ca6;
+  --sec-6: #b79b74;
+  --style-art: url('/app/visual-themes/aurora.svg');
+  --style-glow: #c8b7f570;
+}
+:root[data-visual-style="aurora"][data-theme="dark"] {
+  --bg: #171428;
+  --surface: #252039;
+  --bg-subtle: #211b33;
+  --bg-sunken: #121021;
+  --bg-hover: #383050;
+  --border: #45385d;
+  --border-soft: #382d4c;
+  --border-strong: #a89cc0;
+  --text: #f4efff;
+  --text-muted: #c4b6d5;
+  --accent: #b69bf4;
+  --accent-hover: #c8b4ff;
+  --accent-contrast: #1c1336;
+  --accent-text: #d5c2ff;
+  --accent-bg: #46336b;
+  --focus-ring: #d8c5ff;
+  --sec-1: #a8a0fa;
+  --sec-2: #75c8bb;
+  --sec-3: #eca0b7;
+  --sec-4: #d7a3f3;
+  --sec-5: #b3a4c8;
+  --sec-6: #d4be95;
+  --style-art: url('/app/visual-themes/aurora.svg');
+  --style-glow: #8870d963;
+}
+
+
+:root {
+  --style-mountains-swatch: #dcefe6;
+  --style-starship-swatch: #0b1c3a;
+  --style-aurora-swatch: #e5e0ff;
+}

@@ -1,0 +1,70 @@
+/* Cockpit V4 — attention-first responsive workspace; no empty full-width Agent panel. */
+.cockpit-overview { container-type: inline-size; }
+.cockpit-overview > * + * { margin-top: var(--sp-3); }
+.cockpit-overview .kpi-strip { gap: var(--sp-2); }
+.cockpit-overview .kpi-cell {
+  border: 1px solid var(--border);
+  padding: var(--sp-3) var(--sp-4);
+  min-height: 78px;
+  gap: var(--sp-1);
+}
+.cockpit-overview .kpi-value { font-weight: 780; }
+.cockpit-overview .kpi-label { font-weight: 600; }
+.cockpit-overview .unconfirmed-feed {
+  margin: 0;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 0;
+}
+.cockpit-overview .unconfirmed-feed > summary {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  min-height: 36px;
+  padding: var(--sp-2) var(--sp-3);
+  cursor: pointer;
+  list-style-position: inside;
+}
+.cockpit-overview .unconfirmed-feed-title { font-size: var(--fs-compact); font-weight: 750; }
+.cockpit-overview .unconfirmed-feed-hint { font-size: var(--fs-compact); margin-inline-start: auto; }
+.cockpit-overview .unconfirmed-feed[open] > summary { border-bottom: 1px solid var(--border); }
+.cockpit-overview .unconfirmed-feed[data-feed="unconfirmed"] .feed-list { padding: var(--sp-2); }
+.cockpit-overview .unconfirmed-feed > summary .count-badge[data-pending-count="0"] { background: var(--bg-sunken); color: var(--text-muted); }
+.cockpit-overview .unconfirmed-feed > summary .count-badge:not([data-pending-count="0"]) { background: var(--st-waiting-bg); color: var(--st-waiting-fg); }
+.cockpit-overview .unconfirmed-feed[open] > .muted { padding: var(--sp-2) var(--sp-3); }
+.cockpit-command-grid { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, .95fr); align-items: start; gap: var(--sp-3); min-width: 0; }
+.cockpit-command-main { min-width: 0; display: flex; flex-direction: column; gap: var(--sp-4); }
+.cockpit-lane-header { display: flex; align-items: baseline; gap: var(--sp-2); flex-wrap: wrap; margin-bottom: var(--sp-2); }
+.cockpit-lane-header h2 { margin: 0; font-size: var(--fs-h2); font-weight: 800; }
+.cockpit-lane-header > .muted { font-size: var(--fs-compact); }
+.cockpit-focus-groups, .cockpit-upcoming-groups { display: grid; min-width: 0; gap: var(--sp-2); }
+.cockpit-focus-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.cockpit-upcoming-groups { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.cockpit-command-grid .cockpit-group { min-width: 0; background: var(--bg-subtle); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--sp-3); }
+.cockpit-command-grid .cockpit-group > h2 { padding: 0; margin: 0 0 var(--sp-2); font-size: var(--fs-body); font-weight: 750; }
+.cockpit-command-grid .cockpit-item { background: var(--surface); border: 1px solid var(--border-soft); padding: var(--sp-2); margin-bottom: var(--sp-2); min-width: 0; }
+.cockpit-command-grid .cockpit-item .task-main { flex-wrap: wrap; gap: var(--sp-1); }
+.cockpit-command-grid .cockpit-item .task-title { overflow-wrap: anywhere; }
+.cockpit-command-grid .cockpit-item .task-meta { overflow-wrap: anywhere; }
+.cockpit-recent-lane { min-width: 0; height: 100%; }
+.cockpit-recent-lane .cockpit-group { background: var(--surface); box-shadow: var(--shadow-sm); }
+.cockpit-recent-lane .cockpit-group > h2 { font-size: var(--fs-h2); }
+.cockpit-recent-lane .cockpit-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-2); }
+.cockpit-recent-lane .cockpit-item { padding: var(--sp-2); margin: 0; }
+.cockpit-recent-lane .task-meta { font-size: var(--fs-compact); }
+@container (max-width: 1130px) {
+  .cockpit-command-grid { grid-template-columns: minmax(0, 1fr); }
+  .cockpit-command-main { gap: var(--sp-3); }
+  .cockpit-recent-lane .cockpit-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@container (max-width: 780px) {
+  .cockpit-upcoming-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cockpit-recent-lane .cockpit-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@container (max-width: 530px) {
+  .cockpit-overview .kpi-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cockpit-focus-groups, .cockpit-upcoming-groups { grid-template-columns: 1fr; }
+  .cockpit-recent-lane .cockpit-list { grid-template-columns: 1fr; }
+  .cockpit-overview .unconfirmed-feed-hint { display: none; }
+}

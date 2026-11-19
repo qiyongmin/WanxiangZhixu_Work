@@ -1,0 +1,390 @@
+/* KB_Work Notes V3.3 · OneNote Canvas (approved visual Option 01).
+ * Presentation only for layout; Notes V3 canonical Page/Section storage,
+ * single editor, autosave, Draft Guard, Event/Timeline and links remain intact. */
+.notebook-v3{
+  gap:0;
+  padding:0;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  min-height:560px;
+  overflow:hidden;
+}
+.notebook-v3>.notebook-view-switch{
+  padding:0 var(--sp-3);
+  background:var(--surface);
+  min-height:44px;
+  border:0;
+  border-bottom:1px solid var(--border);
+  gap:var(--sp-3);
+  border-radius:0;
+}
+.notebook-v3 .notebook-view-switch button{font-size:var(--fs-compact);min-height:43px}
+.notebook-top-utilities{
+  display:flex;
+  align-items:center;
+  gap:var(--sp-1);
+  margin-inline-start:auto;
+  flex-shrink:0;
+}
+.notebook-v3 .notebook-top-utilities .btn{
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  gap:var(--sp-1);
+  border:0;
+  box-shadow:none;
+  min-width:34px;
+  min-height:34px;
+  background:transparent;
+  color:var(--text-muted);
+}
+.notebook-v3 .notebook-top-utilities .btn:hover{background:var(--bg-subtle);color:var(--accent-text)}
+.notebook-quick-label{font-size:var(--fs-compact)}
+.notebook-v3 .notebook-section-tabs{
+  padding:0 var(--sp-3);
+  min-height:45px;
+  gap:var(--sp-2);
+  background:var(--surface);
+}
+.notebook-v3 .notebook-section-tabs button:not(.notebook-add-tab){
+  border-top:0;
+  border-bottom:2px solid transparent;
+  min-height:43px;
+}
+.notebook-v3 .notebook-section-tabs button:not(.notebook-add-tab).is-active{
+  border-top:0;
+  border-bottom:2px solid var(--notebook-tone,var(--accent));
+  box-shadow:none;
+}
+.notebook-v3 .notebook-section-actions{
+  padding:0 var(--sp-3);
+  min-height:0;
+  justify-content:flex-end;
+  opacity:.8;
+  background:var(--surface);
+}
+.notebook-v3 .notebook-section-actions button{
+  min-width:26px;
+  min-height:25px;
+  color:var(--text-muted);
+  font-size:var(--fs-compact);
+}
+.notebook-v3 .notebook-onenote-canvas{
+  grid-template-columns:minmax(0,1fr) minmax(174px,208px);
+  gap:0;
+  flex:1;
+  min-height:530px;
+  border:0;
+  background:var(--surface);
+  align-items:stretch;
+}
+.notebook-v3 .notebook-onenote-canvas>.notebook-page-stage{
+  grid-column:1;
+  grid-row:1;
+  min-width:0;
+  min-height:510px;
+  display:flex;
+  flex-direction:column;
+  gap:0;
+  padding:0;
+  background:var(--surface);
+}
+.notebook-v3 .notebook-onenote-canvas>.notebook-page-sidebar{
+  grid-column:2;
+  grid-row:1;
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+  overflow:hidden;
+  margin:0;
+  padding:0;
+  border:0;
+  border-inline-start:1px solid var(--border);
+  border-radius:0;
+  background:var(--bg-subtle);
+}
+.notebook-canvas-tools{
+  min-height:47px;
+  padding:0 var(--sp-3);
+  display:flex;
+  align-items:center;
+  gap:var(--sp-2);
+  border-bottom:1px solid var(--border);
+  background:var(--surface);
+  flex:0 0 auto;
+}
+.notebook-v3 .notebook-canvas-tools .notebook-shared-toolbar{
+  position:static;
+  display:flex;
+  flex:1;
+  align-items:center;
+  background:transparent;
+  border:0;
+  padding:var(--sp-1) 0;
+  min-height:38px;
+  box-shadow:none;
+}
+.notebook-v3 .notebook-canvas-tools .note-toolbar{gap:0}
+.notebook-v3 .notebook-canvas-tools .note-toolbar .btn{
+  min-width:29px;
+  min-height:29px;
+  padding:var(--sp-1);
+  border:0;
+  box-shadow:none;
+}
+.notebook-v3 .notebook-canvas-tools .note-color-control select{
+  max-width:100px;
+  min-height:30px;
+  font-size:var(--fs-compact);
+}
+.notebook-v3 .notebook-canvas-editor{
+  display:flex;
+  flex:1;
+  flex-direction:column;
+  min-height:440px;
+  padding:0;
+  margin:0;
+  gap:0;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  background:var(--surface);
+}
+.notebook-canvas-status{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:var(--sp-2);
+  min-height:28px;
+  justify-content:flex-end;
+  padding:var(--sp-1) var(--sp-4);
+  background:var(--surface);
+  color:var(--text-muted);
+  font-size:var(--fs-compact);
+}
+.notebook-canvas-status .notebook-save-status{color:var(--st-done-fg)}
+.notebook-canvas-status .notebook-error{font-size:var(--fs-compact);max-width:100%;overflow-wrap:anywhere}
+.notebook-agent-note{color:var(--st-waiting-fg)}
+.notebook-v3 .notebook-canvas-editor .note-card{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  border:0;
+  border-radius:0;
+  padding:0;
+  min-height:400px;
+  background:var(--surface);
+}
+.notebook-v3 .notebook-canvas-editor .note-card>.note-body{
+  display:flex;
+  flex:1;
+  flex-direction:column;
+  min-height:400px;
+  padding:0;
+  margin:0;
+  border:0;
+  background:transparent;
+}
+.notebook-v3 .notebook-canvas-editor .note-editor{
+  flex:1;
+  min-height:400px;
+  padding:var(--sp-6) max(var(--sp-5),5%);
+  font-size:var(--fs-body);
+  line-height:1.8;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  outline-offset:-2px;
+  background:var(--surface);
+  overflow-wrap:break-word;
+}
+.notebook-v3 .notebook-canvas-editor .note-editor:focus{
+  border:0;
+  box-shadow:none;
+  outline:2px solid transparent;
+}
+.notebook-v3 .notebook-canvas-editor .notebook-page-history{
+  padding:var(--sp-3) var(--sp-4);
+  border-bottom:1px solid var(--border);
+  background:var(--bg-subtle);
+}
+.notebook-v3 .notebook-onenote-canvas .notebook-page-sidebar-head{
+  padding:var(--sp-3) var(--sp-2) var(--sp-2);
+  align-items:center;
+  flex-wrap:wrap;
+  gap:var(--sp-1);
+}
+.notebook-v3 .notebook-page-sidebar-head>strong{
+  font-size:var(--fs-body);
+  font-weight:750;
+  color:var(--text);
+}
+.notebook-v3 .notebook-page-sidebar-head .notebook-page-tools{gap:0}
+.notebook-v3 .notebook-page-sidebar-head .notebook-page-tools .btn-icon{
+  min-width:29px;min-height:29px;
+  padding:var(--sp-1);
+  border:0;
+  background:transparent;
+  box-shadow:none;
+}
+.notebook-v3 .notebook-archive-toggle{
+  display:flex;
+  gap:var(--sp-1);
+  padding:var(--sp-1);
+  font-size:var(--fs-compact);
+}
+.notebook-v3 .notebook-page-sidebar nav{
+  max-height:min(72vh,780px);
+  padding:0 var(--sp-2) var(--sp-2);
+  gap:0;
+}
+.notebook-v3 .notebook-page-sidebar .notebook-page-row{
+  position:relative;
+  display:flex;
+  align-items:center;
+  gap:0;
+  margin-bottom:var(--sp-1);
+  padding:0;
+  border-radius:var(--radius);
+}
+.notebook-v3 .notebook-page-sidebar .notebook-page-row>button:first-child{
+  min-width:0;
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:var(--sp-1);
+  padding:var(--sp-2) var(--sp-3);
+  text-align:left;
+  border:0;
+  border-inline-start:2px solid transparent;
+  background:transparent;
+  border-radius:var(--radius);
+  font-size:var(--fs-compact);
+}
+.notebook-v3 .notebook-page-sidebar .notebook-page-row>button[aria-current="page"]{
+  border:0;
+  border-inline-start:2px solid var(--notebook-tone,var(--accent));
+  background:color-mix(in srgb,var(--notebook-tone,var(--accent)) 7%,var(--surface));
+}
+.notebook-v3 .notebook-page-sidebar .notebook-page-row>button[aria-current="page"]::before{content:none}
+.notebook-v3 .notebook-page-sidebar .notebook-page-row strong{
+  font-weight:650;
+  font-size:var(--fs-compact);
+  max-width:100%;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.notebook-v3 .notebook-page-sidebar .notebook-page-row span{font-size:var(--fs-compact)}
+.notebook-page-more{
+  flex:0 0 auto;
+  min-width:30px;
+  min-height:32px;
+  padding:0;
+  border:0;
+  background:transparent;
+  color:var(--text-muted);
+  opacity:.25;
+  cursor:pointer;
+}
+.notebook-page-row:hover .notebook-page-more,
+.notebook-page-row:focus-within .notebook-page-more,
+.notebook-page-more[aria-expanded="true"]{opacity:1}
+.notebook-page-context{
+  position:relative;
+  z-index:10;
+  margin:var(--sp-1) var(--sp-2);
+  padding:var(--sp-2);
+  display:flex;
+  flex-direction:column;
+  gap:var(--sp-1);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  background:var(--surface);
+  box-shadow:var(--shadow-md);
+  max-height:55vh;
+  overflow:auto;
+}
+.notebook-page-context-title{
+  padding:var(--sp-2);
+  color:var(--text-muted);
+  font-size:var(--fs-compact);
+  font-weight:700;
+  overflow-wrap:anywhere;
+}
+.notebook-page-context>button{
+  min-height:35px;
+  padding:var(--sp-2) var(--sp-3);
+  text-align:left;
+  border:0;
+  border-radius:var(--radius);
+  background:transparent;
+  color:var(--text);
+  cursor:pointer;
+}
+.notebook-page-context>button:hover{background:var(--bg-subtle)}
+.notebook-page-context>button:nth-last-child(2){color:var(--st-blocked-fg)}
+.notebook-context-move{
+  display:flex;
+  flex-direction:column;
+  gap:var(--sp-1);
+  padding:var(--sp-2);
+  font-size:var(--fs-compact);
+  color:var(--text-muted);
+}
+.notebook-context-move select{
+  max-width:100%;
+  min-width:0;
+  padding:var(--sp-1);
+  background:var(--surface);
+  border:1px solid var(--border);
+  color:var(--text);
+  border-radius:var(--radius);
+}
+.notebook-v3 .notebook-page-order{
+  padding:var(--sp-1);
+  margin-top:auto;
+}
+.notebook-v3 .notebook-page-order button{
+  border:0;
+  background:transparent;
+  min-height:29px;
+  font-size:var(--fs-compact);
+}
+/* Section management is on-demand; keep its resting line visually quiet. */
+.notebook-v3 .notebook-section-actions{min-height:28px;padding:0 var(--sp-2);position:relative}
+.notebook-v3 .notebook-section-actions>button{display:flex;align-items:center;gap:var(--sp-1);font-size:var(--fs-compact);color:var(--text-muted)}
+.notebook-section-menu{display:flex;gap:var(--sp-1);align-items:center}
+.notebook-section-menu button{background:transparent;border:0;min-width:32px;min-height:30px;color:var(--text-muted)}
+@media(max-width:900px){
+  .notebook-v3 .notebook-onenote-canvas{grid-template-columns:minmax(0,1fr) minmax(165px,190px)}
+  .notebook-v3 .notebook-canvas-editor .note-editor{padding:var(--sp-5)}
+}
+@media(max-width:650px){
+  .notebook-v3 .notebook-onenote-canvas{
+    display:flex;
+    flex-direction:column;
+  }
+  .notebook-v3 .notebook-onenote-canvas>.notebook-page-stage{
+    order:1;
+    min-height:380px;
+  }
+  .notebook-v3 .notebook-onenote-canvas>.notebook-page-sidebar{
+    order:0;
+    border-inline-start:0;
+    border-bottom:1px solid var(--border);
+    max-height:50vh;
+    display:none;
+  }
+  .notebook-v3 .notebook-onenote-canvas>.notebook-page-sidebar.is-open{display:flex}
+  .notebook-v3 .notebook-pages-toggle{display:inline-flex;min-height:38px}
+  .notebook-v3 .notebook-page-sidebar .notebook-page-more{opacity:1}
+  .notebook-v3 .notebook-canvas-editor .note-editor{
+    min-height:380px;
+    padding:var(--sp-4);
+  }
+  .notebook-v3>.notebook-view-switch{padding:0 var(--sp-2)}
+  .notebook-v3 .notebook-top-utilities .notebook-quick-label{display:none}
+}

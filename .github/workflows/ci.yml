@@ -1,0 +1,88 @@
+# Public source-only CI. NO deployment, repository secrets or runtime data upload.
+name: KB_Work Source CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-safety:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Inspect source allowlist and history, run privacy unit tests
+        run: |
+          python3 tools/work_github_public.py
+          python3 tools/work_source_audit.py
+          python3 -m unittest tests.test_work_source_audit tests.test_work_github_public tests.test_work_ui_design_system -q
+
+  python-tests:
+    runs-on: ubuntu-latest
+    needs: source-safety
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python3 -m pip install -r requirements.txt
+      - run: |
+          python3 -m unittest \
+            tests.test_work_clean_init tests.test_work_demo \
+            tests.test_work_doctor tests.test_work_install_docs \
+            tests.test_work_office_headless_smoke tests.test_work_housekeeping \
+            tests.test_work_backup_private tests.test_work_v2_release_gate \
+            tests.test_work_v2_nodes tests.test_work_v2_materials \
+            tests.test_work_v2_agent tests.test_work_folder_bridge \
+            tests.test_work_portal_protocol tests.test_work_v11_skills_backup \
+            tests.test_work_github_public -q
+
+  frontend:
+    runs-on: ubuntu-latest
+    needs: source-safety
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm --prefix web ci --ignore-scripts
+      - run: npm --prefix web run typecheck
+      - run: npm --prefix web run test -- --run
+      - run: npm --prefix web run build
+      - run: npm --prefix web sbom --sbom-format=cyclonedx
+
+  empty-local-clone:
+    runs-on: ubuntu-latest
+    needs: [source-safety, python-tests, frontend]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: python3 -m pip install -r requirements.txt
+      - name: Prime npm cache for isolated offline clone
+        run: npm --prefix web ci --ignore-scripts
+      - name: Clone, initialize zero records, build, run localhost API smoke
+        run: python3 -m unittest tests.test_work_gitlab_fresh_clone -q

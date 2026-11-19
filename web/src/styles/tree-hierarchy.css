@@ -1,0 +1,85 @@
+/* KB_Work Tree hierarchy V2.2. No textual L1/L2/L3 tags.
+ * Depth is conveyed through existing indentation, restrained title colors and
+ * typography; the active row has one quiet, reduced-motion-aware glow. */
+.tree .tree-item[data-tier] {
+  --tree-tier-fg: var(--text);
+}
+.tree .tree-item[data-tier="1"] { --tree-tier-fg: var(--st-progress-fg); }
+.tree .tree-item[data-tier="2"] { --tree-tier-fg: var(--st-done-fg); }
+.tree .tree-item[data-tier="3"] { --tree-tier-fg: var(--kpi-orange); }
+.tree .tree-item[data-tier="4"] { --tree-tier-fg: var(--text-muted); }
+.tree .tree-section > .tree-row > .tree-section-label {
+  font-size: var(--fs-tree-section);
+  font-weight: 820;
+  letter-spacing: .012em;
+}
+.tree .tree-item[data-tier] > .tree-row {
+  position: relative;
+  gap: var(--sp-1);
+  transition: background-color var(--dur-base) ease, box-shadow var(--dur-base) ease;
+}
+.tree .tree-item[data-tier] > .tree-row > .tree-label {
+  color: var(--tree-tier-fg);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color var(--dur-base) ease;
+}
+.tree .tree-item[data-tier="1"] > .tree-row > .tree-label { font-weight: 740; font-size: var(--fs-tree-l1); }
+.tree .tree-item[data-tier="2"] > .tree-row > .tree-label { font-weight: 640; font-size: var(--fs-tree-l2); }
+.tree .tree-item[data-tier="3"] > .tree-row > .tree-label { font-weight: 550; font-size: var(--fs-tree-l3); }
+.tree .tree-item[data-tier="4"] > .tree-row > .tree-label { font-weight: 500; font-size: var(--fs-tree-l4); }
+.tree .tree-item.is-ancestor[data-tier] > .tree-row {
+  background: color-mix(in srgb, var(--accent-bg) 32%, var(--surface));
+  box-shadow: inset 2px 0 0 color-mix(in srgb, var(--accent) 40%, transparent);
+}
+.tree .tree-item.is-ancestor[data-tier] > .tree-row > .tree-label { font-weight: 700; }
+.tree .tree-item.is-selected[data-tier] > .tree-row,
+.tree .tree-section ul .tree-item.is-selected[data-tier] > .tree-row {
+  background: var(--accent-bg);
+  box-shadow: inset 3px 0 0 var(--accent), inset 0 0 0 1px color-mix(in srgb, var(--accent) 55%, transparent);
+  animation: tree-active-glow 3s ease-in-out infinite;
+}
+.tree .tree-item.is-selected[data-tier] > .tree-row > .tree-label {
+  color: var(--accent-text);
+  font-weight: 780;
+}
+.tree .tree-item.is-selected[data-tier] > .tree-row::after {
+  content: "";
+  width: 5px; height: 5px; flex: 0 0 5px;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  margin-inline-start: var(--sp-1);
+}
+.tree .tree-item.is-selected[data-tier] > .tree-row .count-badge {
+  background: var(--surface);
+  color: var(--accent-text);
+}
+.tree .tree-item[data-tier] > .tree-row:hover {
+  background: color-mix(in srgb, var(--accent-bg) 65%, var(--surface));
+}
+.tree .tree-item.is-selected[data-tier] > .tree-row:hover { background: var(--accent-bg); }
+.tree [role="treeitem"]:focus-visible > .tree-row {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: -2px;
+}
+@keyframes tree-active-glow {
+  0%, 100% {
+    box-shadow: inset 3px 0 0 var(--accent),
+      inset 0 0 0 1px color-mix(in srgb, var(--accent) 50%, transparent),
+      0 0 0 0 transparent;
+  }
+  50% {
+    box-shadow: inset 3px 0 0 var(--accent),
+      inset 0 0 0 1px color-mix(in srgb, var(--accent) 65%, transparent),
+      0 0 0 2px color-mix(in srgb, var(--accent) 12%, transparent);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tree .tree-item.is-selected[data-tier] > .tree-row {
+    animation: none;
+  }
+}
+@media (max-width: 779px) {
+  .tree .tree-item[data-tier] > .tree-row { min-height: 40px; }
+  .tree .tree-item[data-tier] > .tree-row > .tree-label { min-height: 40px; display: flex; align-items: center; }
+}

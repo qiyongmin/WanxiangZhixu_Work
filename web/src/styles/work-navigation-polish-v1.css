@@ -1,0 +1,50 @@
+/* KB_Work 2026-11-14: Week / Quick Access / left navigation polish.
+   Cockpit Overview remains visually UNCHANGED until the user picks 01/02/03. */
+
+/* Cockpit gets a permanent premium navigational anchor; Agent Activity lives in footer. */
+.entries-top{padding:var(--sp-3) var(--sp-2) var(--sp-2)}
+.entries-top .entry{display:flex;min-height:58px;gap:var(--sp-3);padding:var(--sp-3) var(--sp-4);
+  background:var(--bg-subtle);border:1px solid var(--border);
+  border-inline-start:4px solid var(--accent);border-radius:var(--radius-lg);
+  font-size:var(--fs-h2);font-weight:820;letter-spacing:-.015em;
+  box-shadow:var(--shadow-sm)}
+.entries-top .entry .icon{width:23px;height:23px;flex:0 0 23px;color:var(--accent-text)}
+.entries-top .entry:hover,.entries-top .entry.is-active{color:var(--accent-text);
+  background:var(--accent-bg);border-color:var(--accent);border-inline-start-width:4px}
+.entries-bottom .entry[href$="/agent"]{border-top:1px solid var(--border);border-radius:0;
+  margin-top:var(--sp-2);padding-top:var(--sp-3)}
+
+/* L1: display the primary identity and KPI strip first, then an understated shortcut shelf. */
+.l1-explorer-metrics{margin-top:var(--sp-4)}
+.l1-primary-shortcuts{display:flex;align-items:center;gap:var(--sp-2);margin:var(--sp-2) 0 var(--sp-4);
+  padding:var(--sp-2) var(--sp-3);
+  border:1px solid var(--border);border-radius:var(--radius-lg);
+  background:var(--bg-subtle);box-shadow:var(--shadow-sm)}
+.l1-primary-shortcuts .l1-quick-access{background:transparent;border:0;box-shadow:none}
+.l1-primary-shortcuts .l1-shortcut-caption{color:var(--text-muted)}
+/* L2/L3 shortcuts are part of the Focus Workspace, directly below the navigation tabs. */
+.node-detail-focus .focus-shortcuts-row{display:flex;align-items:center;min-width:0;
+  margin:var(--sp-2) 0 var(--sp-4);
+  padding:var(--sp-2) var(--sp-3);border:1px solid var(--border);
+  border-radius:var(--radius-lg);background:var(--bg-subtle)}
+.node-detail-focus .focus-shortcuts-row .l1-quick-access.is-inherited{
+  margin:0;max-width:100%;background:transparent;border:0;box-shadow:none}
+.node-detail-focus .focus-shortcuts-row .l1-shortcut-caption{color:var(--text-muted)}
+/* Week: No Date first, Overdue second, five weekdays unless user opens Sat & Sun. */
+.cockpit-week .week-nav{flex-wrap:wrap}
+.cockpit-week .week-weekend-toggle{margin-inline-start:auto;display:inline-flex;gap:var(--sp-2);
+  align-items:center;white-space:nowrap;font-weight:650}
+.cockpit-week .agenda{grid-template-columns:repeat(7,minmax(145px,1fr));gap:var(--sp-2);
+  scroll-snap-type:x proximity}
+.cockpit-week .agenda:has([data-lane]:nth-child(9)){grid-template-columns:repeat(9,minmax(145px,1fr))}
+.cockpit-week .agenda-lane{border:1px solid var(--border);background:var(--bg-subtle);
+  min-height:230px;scroll-snap-align:start}
+.cockpit-week .agenda-lane[data-lane="no-date"]{background:var(--accent-bg);border-color:var(--accent)}
+.cockpit-week .agenda-lane[data-lane="overdue"]{background:var(--st-blocked-bg);border-color:var(--st-blocked-fg)}
+.cockpit-week .agenda-lane.is-today{background:var(--st-progress-bg);border-color:var(--st-progress-fg)}
+@media(max-width:820px){
+  .l1-primary-shortcuts,.node-detail-focus .focus-shortcuts-row{padding:var(--sp-2)}
+  .cockpit-week .week-weekend-toggle{margin-inline-start:0}
+  .cockpit-week .agenda{grid-template-columns:repeat(7,minmax(180px,1fr))}
+  .cockpit-week .agenda:has([data-lane]:nth-child(9)){grid-template-columns:repeat(9,minmax(180px,1fr))}
+}

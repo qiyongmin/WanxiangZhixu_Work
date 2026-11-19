@@ -1,0 +1,318 @@
+/* KB_Work UI V3.2 · Precision Line (approved visual concept 01).
+ * Presentation-only override of V3.1; no content, state, routing or persistence changes.
+ * Consistent hairline navigation, light section markers, subtle page rail.
+ * Use existing theme tokens for Light/Dark, Mountain, Starship and Aurora. */
+
+/* L1 / L2 / L3 primary navigation — typography + a single fine baseline.
+   Existing L2/L3 .tab and L1 .l1-panel-button keep their click targets. */
+.node-detail-focus .focus-tabs,
+.l1-project-canvas .l1-canvas-tabs{
+  display:flex;
+  align-items:center;
+  gap:var(--sp-4);
+  border:0;
+  border-bottom:1px solid var(--border);
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+  padding:0 var(--sp-2);
+  min-width:0;
+  overflow-x:auto;
+  scrollbar-width:thin;
+}
+.node-detail-focus .focus-tabs .tab,
+.l1-project-canvas .l1-canvas-tabs .l1-panel-button{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 auto;
+  gap:var(--sp-2);
+  min-width:0;
+  min-height:44px;
+  margin:0;
+  padding:var(--sp-2) var(--sp-2) var(--sp-3);
+  color:var(--text-muted);
+  background:transparent;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  font-size:var(--fs-body);
+  font-weight:640;
+  white-space:nowrap;
+  cursor:pointer;
+}
+.node-detail-focus .focus-tabs .tab:hover,
+.l1-project-canvas .l1-canvas-tabs .l1-panel-button:hover{
+  background:transparent;
+  color:var(--accent-text);
+  border-color:transparent;
+  box-shadow:none;
+}
+.node-detail-focus .focus-tabs .tab.is-active,
+.l1-project-canvas .l1-canvas-tabs .l1-panel-button.is-active{
+  color:var(--accent-text);
+  background:transparent;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  font-weight:750;
+}
+.node-detail-focus .focus-tabs .tab.is-active::after,
+.l1-project-canvas .l1-canvas-tabs .l1-panel-button.is-active::after{
+  content:'';
+  position:absolute;
+  height:2px;
+  bottom:-1px;
+  inset-inline:var(--sp-2);
+  border-radius:var(--radius-pill);
+  background:var(--accent);
+  pointer-events:none;
+}
+.node-detail-focus .focus-tabs .tab:focus-visible,
+.l1-project-canvas .l1-canvas-tabs .l1-panel-button:focus-visible{
+  outline:2px solid var(--focus-ring);
+  outline-offset:-3px;
+  border-radius:var(--radius);
+}
+.node-detail-focus .focus-tabs .menu-wrap,
+.l1-project-canvas .l1-canvas-tabs .menu-wrap{
+  margin-inline-start:auto;
+}
+
+/* Secondary Notebook / Timeline / Linked Pages navigation uses the same vocabulary. */
+.notebook-v3 .notebook-view-switch{
+  width:100%;
+  gap:var(--sp-3);
+  padding:0;
+  border:0;
+  border-bottom:1px solid var(--border);
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+}
+.notebook-v3 .notebook-view-switch button{
+  position:relative;
+  flex:0 0 auto;
+  min-height:40px;
+  padding:var(--sp-2) var(--sp-1) var(--sp-3);
+  background:transparent;
+  box-shadow:none;
+  border:0;
+  border-radius:0;
+  color:var(--text-muted);
+  font-size:var(--fs-compact);
+  font-weight:620;
+}
+.notebook-v3 .notebook-view-switch button[aria-pressed="true"]{
+  background:transparent;
+  box-shadow:none;
+  color:var(--accent-text);
+  font-weight:750;
+}
+.notebook-v3 .notebook-view-switch button[aria-pressed="true"]::after{
+  content:'';
+  position:absolute;
+  height:2px;
+  inset-inline:var(--sp-1);
+  bottom:-1px;
+  border-radius:var(--radius-pill);
+  background:var(--accent);
+}
+.notebook-v3 .notebook-view-switch button:focus-visible{
+  outline:2px solid var(--focus-ring);
+  outline-offset:-3px;
+}
+
+/* Reuse existing per-Section stable tone ID; keep only the tiny colored dot and
+   a restrained two-pixel active top rail. Color is never the sole selected cue. */
+.notebook-v3 [data-tone="0"]{--notebook-tone:var(--sec-1)}
+.notebook-v3 [data-tone="1"]{--notebook-tone:var(--sec-2)}
+.notebook-v3 [data-tone="2"]{--notebook-tone:var(--sec-3)}
+.notebook-v3 [data-tone="3"]{--notebook-tone:var(--sec-4)}
+.notebook-v3 [data-tone="4"]{--notebook-tone:var(--sec-5)}
+.notebook-v3 [data-tone="5"]{--notebook-tone:var(--sec-6)}
+
+.notebook-v3 .notebook-section-tabs{
+  display:flex;
+  align-items:stretch;
+  gap:var(--sp-3);
+  border:0;
+  border-bottom:1px solid var(--border);
+  padding:var(--sp-2) 0 0;
+  margin:0;
+  background:transparent;
+}
+.notebook-v3 .notebook-section-tabs button:not(.notebook-add-tab){
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  gap:var(--sp-2);
+  min-height:42px;
+  padding:var(--sp-3) var(--sp-2);
+  color:var(--text-muted);
+  font-size:var(--fs-compact);
+  font-weight:620;
+  border:0;
+  border-top:2px solid transparent;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+}
+.notebook-v3 .notebook-section-tabs button:not(.notebook-add-tab)::before{
+  content:'';
+  display:inline-block;
+  flex:0 0 auto;
+  width:5px;
+  height:5px;
+  border-radius:50%;
+  background:var(--notebook-tone,var(--accent));
+  opacity:.6;
+}
+.notebook-v3 .notebook-section-tabs button:not(.notebook-add-tab):hover{
+  background:transparent;
+  color:var(--text);
+  border-top-color:transparent;
+}
+.notebook-v3 .notebook-section-tabs button:not(.notebook-add-tab).is-active{
+  border:0;
+  border-top:2px solid var(--notebook-tone,var(--accent));
+  border-radius:0;
+  background:transparent;
+  color:var(--text);
+  font-weight:750;
+  box-shadow:none;
+}
+.notebook-v3 .notebook-section-tabs button:not(.notebook-add-tab).is-active::before{
+  opacity:1;
+}
+.notebook-v3 .notebook-section-tabs button:not(.notebook-add-tab):focus-visible,
+.notebook-v3 .notebook-section-tabs .notebook-add-tab:focus-visible{
+  outline:2px solid var(--focus-ring);
+  outline-offset:-3px;
+}
+.notebook-v3 .notebook-section-tabs .notebook-add-tab{
+  background:transparent;
+  border:0;
+  min-height:42px;
+  color:var(--text-muted);
+  font-weight:550;
+}
+.notebook-v3 .notebook-section-tabs .notebook-add-tab:hover{color:var(--accent-text)}
+
+/* Section actions no longer form a highlighted bar; the selected Section label
+   remains a quiet breadcrumb above the connected Pages-and-Editor workspace. */
+.notebook-v3 .notebook-section-actions{
+  gap:var(--sp-2);
+  padding:var(--sp-2) var(--sp-1);
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+  color:var(--text-muted);
+}
+.notebook-v3 .notebook-section-actions>span:first-child{
+  font-weight:680;
+  color:var(--text);
+}
+.notebook-v3 .notebook-section-actions button{
+  background:transparent;
+  border-color:transparent;
+}
+.notebook-v3 .notebook-section-actions button:hover{
+  background:var(--bg-subtle);
+  border-color:var(--border);
+}
+.notebook-v3 .notebook-two-pane{
+  margin:0;
+  border:0;
+  border-top:1px solid var(--border);
+  border-radius:0;
+  gap:0;
+}
+.notebook-v3 .notebook-page-sidebar{
+  gap:var(--sp-2);
+  border:0;
+  border-inline-end:1px solid var(--border);
+  border-radius:0;
+  box-shadow:none;
+  background:color-mix(in srgb,var(--notebook-tone,var(--accent)) 2%,var(--bg-subtle));
+}
+.notebook-v3 .notebook-page-sidebar .notebook-page-row>button:first-child{
+  position:relative;
+  margin:0;
+  padding:var(--sp-3) var(--sp-3) var(--sp-3) var(--sp-4);
+  border:1px solid transparent;
+  border-radius:var(--radius);
+  background:transparent;
+  box-shadow:none;
+  color:var(--text-muted);
+}
+.notebook-v3 .notebook-page-sidebar .notebook-page-row>button:first-child:hover{
+  background:var(--surface);
+  border-color:transparent;
+  color:var(--text);
+}
+.notebook-v3 .notebook-page-sidebar .notebook-page-row>button[aria-current="page"]{
+  border:1px solid transparent;
+  border-radius:var(--radius);
+  box-shadow:none;
+  background:color-mix(in srgb,var(--notebook-tone,var(--accent)) 6%,var(--surface));
+  color:var(--text);
+}
+.notebook-v3 .notebook-page-sidebar .notebook-page-row>button[aria-current="page"]::before{
+  content:'';
+  position:absolute;
+  inset-block:var(--sp-2);
+  inset-inline-start:var(--sp-1);
+  width:2px;
+  background:var(--notebook-tone,var(--accent));
+  border-radius:var(--radius-pill);
+}
+.notebook-v3 .notebook-page-sidebar .notebook-page-row>button[aria-current="page"] strong{
+  font-weight:750;
+}
+.notebook-v3 .notebook-page-sidebar-head{padding-top:var(--sp-3)}
+.notebook-v3 .notebook-page-stage{
+  min-width:0;
+  padding:var(--sp-2) var(--sp-3);
+}
+
+/* The common formatting toolbar and section list should look like content,
+   not a separate control bar glued above a heavy card. */
+.notebook-v3 .notebook-shared-toolbar{
+  border:0;
+  border-bottom:1px solid var(--border);
+  border-radius:0;
+  box-shadow:none;
+  background:var(--surface);
+  padding:var(--sp-2);
+}
+.notebook-v3 .notebook-editor{
+  border:1px solid var(--border);
+  box-shadow:none;
+}
+@media(max-width:650px){
+  .node-detail-focus .focus-tabs,
+  .l1-project-canvas .l1-canvas-tabs{gap:var(--sp-2);padding-inline:0}
+  .node-detail-focus .focus-tabs .tab,
+  .l1-project-canvas .l1-canvas-tabs .l1-panel-button{
+    min-height:44px;
+    padding-inline:var(--sp-2);
+    font-size:var(--fs-compact);
+  }
+  .notebook-v3 .notebook-section-tabs{gap:var(--sp-1)}
+  .notebook-v3 .notebook-section-tabs button:not(.notebook-add-tab){
+    min-height:42px;
+    padding-inline:var(--sp-2);
+  }
+  .notebook-v3 .notebook-two-pane{
+    border-top:1px solid var(--border);
+    gap:var(--sp-2);
+  }
+  .notebook-v3 .notebook-page-sidebar{
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+  }
+  .notebook-v3 .notebook-page-stage{padding:0}
+}

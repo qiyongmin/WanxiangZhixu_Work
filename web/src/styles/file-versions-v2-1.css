@@ -1,0 +1,15 @@
+/* File version and upgrade controls: no hard-coded colors, obey all Work themes. */
+.material-version-choice { display:flex;gap:var(--sp-2);padding:var(--sp-3);border:1px solid var(--border);border-radius:var(--radius);cursor:pointer;align-items:flex-start; }
+.material-version-choice:has(input:checked) { background:var(--accent-bg);border-color:var(--accent); }
+.material-version-choice span { display:grid;gap:5px;min-width:0;overflow-wrap:anywhere; }
+.material-version-choice small { color:var(--text-muted);font-size:var(--fs-compact); }
+.file-version-tools { border-top:1px solid var(--border);padding:var(--sp-3) 0;margin-top:var(--sp-3); }
+.file-version-actions { display:flex;gap:var(--sp-2);flex-wrap:wrap;align-items:center;margin:var(--sp-2) 0; }
+.file-version-history { border:1px solid var(--border);background:var(--bg-subtle);border-radius:var(--radius-lg);padding:var(--sp-3); }
+.file-version-current { display:flex;flex-direction:column;gap:var(--sp-1);overflow-wrap:anywhere;margin-bottom:var(--sp-3); }
+.file-version-list { display:grid;gap:var(--sp-2); }
+.file-version-row { display:flex;align-items:center;flex-wrap:wrap;gap:var(--sp-2);padding:var(--sp-2);border:1px solid var(--border-soft);border-radius:var(--radius);background:var(--surface); }
+.file-version-row>div:first-child { display:flex;flex:1 1 220px;flex-direction:column;gap:var(--sp-1); }
+.file-version-row .muted {font-size:var(--fs-compact);}
+.file-version-confirm { flex:1 0 100%;border:1px solid var(--border);border-radius:var(--radius);padding:var(--sp-3); }
+@media(max-width:779px) {.file-version-row .btn,.file-version-actions .btn {min-height:44px;} }

@@ -1,0 +1,112 @@
+/* KB_Work UI V5.1 — bold L1 identity, shortcut-first, compact closed Brief.
+   Presentation-only: no new Work data or URL contracts. */
+.l1-explorer-nav-head .l1-add-workstream {
+  flex: 0 0 auto;
+  margin-inline-start: auto;
+  min-width: 36px;
+  min-height: 36px;
+  color: var(--accent-text);
+  background: var(--accent-bg);
+}
+.node-detail-explorer .node-title {
+  font-size: clamp(var(--fs-l1-title-min), 2.35vw, var(--fs-l1-title-max));
+  font-weight: 820;
+  letter-spacing: -0.025em;
+  line-height: 1.18;
+  overflow-wrap: anywhere;
+}
+.node-detail-explorer .node-title-row {
+  align-items: center;
+  gap: var(--sp-3);
+}
+.node-detail-explorer .node-header { margin-bottom: var(--sp-2); }
+.initiative-explorer { padding-top: 0; }
+.l1-primary-shortcuts {
+  display: flex;
+  min-width: 0;
+  margin-bottom: var(--sp-3);
+}
+.l1-primary-shortcuts .l1-quick-access {
+  flex: 0 1 auto;
+  width: max-content;
+  max-width: 100%;
+  padding: var(--sp-1) var(--sp-2);
+}
+.l1-primary-shortcuts .l1-icon-strip {
+  flex: 0 1 auto;
+  width: max-content;
+  max-width: min(70vw, 690px);
+  gap: var(--sp-2);
+}
+.l1-shortcut-icon {
+  flex: 0 0 50px;
+  width: 50px;
+  height: 50px;
+  padding: var(--sp-2);
+  border-radius: var(--radius-lg);
+}
+.l1-shortcut-icon svg {
+  width: 32px;
+  height: 32px;
+  max-width: 100%;
+  max-height: 100%;
+}
+.l1-shortcut-dock { min-height: 52px; gap: var(--sp-2); }
+.l1-dock-tool { width: 42px; height: 46px; }
+.l1-icon-strip { gap: var(--sp-2); }
+.l1-project-brief {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 0 var(--sp-3);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.l1-project-brief > summary {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  min-height: 39px;
+  padding: var(--sp-2) var(--sp-3);
+  cursor: pointer;
+  list-style: none;
+  font-size: var(--fs-body);
+  font-weight: 720;
+}
+.l1-project-brief > summary::-webkit-details-marker { display: none; }
+.l1-project-brief > summary > svg:last-child {
+  margin-inline-start: auto;
+  transition: transform var(--dur-base) ease;
+}
+.l1-project-brief[open] > summary > svg:last-child { transform: rotate(180deg); }
+.l1-project-brief[open] > summary {
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-subtle);
+}
+.l1-brief-content { padding: var(--sp-3); }
+.l1-brief-content > .summary-block { margin: 0; }
+.l1-brief-content > .summary-block > h2 { display: none; }
+.node-detail-focus > .l1-quick-access.is-inherited {
+  margin-top: var(--sp-3);
+  margin-bottom: var(--sp-3);
+}
+.node-detail-focus > .l1-quick-access.is-inherited .l1-icon-strip {
+  max-width: min(70vw, 690px);
+}
+@media (max-width: 820px) {
+  .node-detail-explorer .node-title { font-size: clamp(var(--fs-l1-title-mobile-min), 5vw, var(--fs-l1-title-mobile-max)); }
+  .l1-shortcut-icon { flex-basis: 52px; width: 52px; height: 52px; }
+  .l1-shortcut-dock { min-height: 54px; }
+  .l1-primary-shortcuts .l1-icon-strip,
+  .node-detail-focus > .l1-quick-access.is-inherited .l1-icon-strip { max-width: min(66vw, 650px); }
+}
+@media (max-width: 440px) {
+  .l1-primary-shortcuts .l1-shortcut-caption { font-size: var(--fs-compact); }
+  .l1-primary-shortcuts .l1-icon-strip { max-width: 54vw; }
+  .node-detail-focus > .l1-quick-access.is-inherited .l1-icon-strip { max-width: 56vw; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .l1-project-brief > summary > svg:last-child { transition: none; }
+}

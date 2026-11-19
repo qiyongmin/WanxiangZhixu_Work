@@ -1,0 +1,828 @@
+/* KB_Work UI V4.0 · Precision Workspace
+ * Strictly opt-in. Classic has NO data-ui-layout attribute and matches none
+ * of these selectors. All colors derive from the active semantic Visual Style
+ * and Light/Dark/System tokens. Presentation only: no controls or content hidden.
+ */
+
+/* 1. Workbench language: quiet structure and typographic alignment, not extra cards. */
+:root[data-ui-layout="precision"]{
+  --precision-line:color-mix(in srgb,var(--border) 84%,var(--border-strong));
+  --precision-tint:color-mix(in srgb,var(--accent) 4%,var(--surface));
+  --precision-tint-strong:color-mix(in srgb,var(--accent) 9%,var(--surface));
+  --precision-canvas:color-mix(in srgb,var(--surface) 75%,var(--bg));
+  --precision-radius:7px;
+  --radius-clarity-panel:11px;
+}
+:root[data-ui-layout="precision"] .app-shell{
+  --toolbar-h:55px;
+  background:var(--bg);
+}
+:root[data-ui-layout="precision"] .toolbar{
+  gap:6px;
+  background:var(--surface);
+  border-bottom:1px solid var(--precision-line);
+  padding-inline:var(--sp-4);
+  box-shadow:none;
+}
+:root[data-ui-layout="precision"] .toolbar-brand-chinese{
+  letter-spacing:.025em;
+  font-weight:770;
+}
+:root[data-ui-layout="precision"] .toolbar-brand-work{
+  letter-spacing:.025em;
+  font-weight:650;
+}
+:root[data-ui-layout="precision"] .toolbar-brand-divider{
+  background:var(--precision-line);
+}
+:root[data-ui-layout="precision"] .toolbar .btn-icon{
+  min-width:40px;
+  min-height:40px;
+  border-color:transparent;
+  border-radius:var(--precision-radius);
+  box-shadow:none;
+}
+:root[data-ui-layout="precision"] .toolbar .btn-icon:hover,
+:root[data-ui-layout="precision"] .toolbar .btn-icon[aria-expanded="true"]{
+  color:var(--accent-text);
+  background:var(--accent-bg);
+  border-color:var(--precision-line);
+}
+:root[data-ui-layout="precision"] .toolbar-ui-layout-menu > button{
+  color:var(--accent-text);
+  background:var(--precision-tint);
+  border:1px solid var(--precision-line);
+}
+:root[data-ui-layout="precision"] .toolbar-ui-layout-menu .menu{
+  min-width:220px;
+}
+:root[data-ui-layout="precision"] .toolbar-ui-layout-menu .menu [role="menuitemradio"][aria-checked="true"]{
+  color:var(--accent-text);
+  background:var(--accent-bg);
+  font-weight:750;
+}
+:root[data-ui-layout="precision"] .main-col{
+  padding:0 var(--sp-2) var(--sp-2);
+}
+:root[data-ui-layout="precision"] .main-scroll{
+  background:var(--surface);
+  border:1px solid var(--precision-line);
+  border-radius:var(--precision-radius);
+  box-shadow:none;
+  padding:clamp(16px,1.9vw,28px) clamp(16px,2.25vw,34px) var(--sp-6);
+}
+:root[data-ui-layout="precision"] .pane-left{
+  background:var(--precision-canvas);
+  border-inline-end:1px solid var(--precision-line);
+}
+:root[data-ui-layout="precision"] .pane-inner-left{
+  background:transparent;
+}
+:root[data-ui-layout="precision"] .tree-region{
+  padding:var(--sp-2);
+}
+:root[data-ui-layout="precision"] .entries-top{
+  padding-block:var(--sp-2);
+}
+:root[data-ui-layout="precision"] .entries .entry{
+  border-radius:var(--precision-radius);
+  font-weight:650;
+}
+:root[data-ui-layout="precision"] .entries .entry.is-active{
+  color:var(--accent-text);
+  border-inline-start:3px solid var(--accent);
+  border-radius:var(--precision-radius);
+  background:var(--precision-tint-strong);
+  box-shadow:none;
+}
+:root[data-ui-layout="precision"] .tree .tree-section > .tree-row > .tree-section-label{
+  font-weight:740;
+  letter-spacing:0;
+  color:var(--text);
+}
+:root[data-ui-layout="precision"] .tree .tree-item[data-tier] > .tree-row{
+  border-radius:var(--precision-radius);
+  box-shadow:none;
+}
+:root[data-ui-layout="precision"] .tree .tree-item.is-selected[data-tier] > .tree-row,
+:root[data-ui-layout="precision"] .tree .tree-section ul .tree-item.is-selected[data-tier] > .tree-row{
+  background:var(--accent-bg);
+  box-shadow:inset 3px 0 0 var(--accent);
+  animation:none;
+}
+:root[data-ui-layout="precision"] .tree .tree-item.is-selected[data-tier] > .tree-row::after{
+  content:none;
+}
+:root[data-ui-layout="precision"] .tree .tree-item[data-tier] > .tree-row:hover{
+  background:var(--precision-tint-strong);
+}
+:root[data-ui-layout="precision"] .tree .tree-item.is-selected[data-tier] > .tree-row:hover{
+  background:var(--accent-bg);
+}
+:root[data-ui-layout="precision"] .tree .tree-item[data-tier="1"] > .tree-row > .tree-label{
+  font-weight:730;
+}
+:root[data-ui-layout="precision"] .pane-resizer:hover,
+:root[data-ui-layout="precision"] .pane-resizer:focus-visible{
+  background:var(--accent-bg);
+}
+:root[data-ui-layout="precision"] .pane-right{
+  border-inline-start:1px solid var(--precision-line);
+}
+
+/* 2. Cockpit: status stays semantic; denser hierarchy and less vertical noise. */
+:root[data-ui-layout="precision"] .cockpit-clarity > * + *{
+  margin-top:var(--sp-3);
+}
+:root[data-ui-layout="precision"] .cockpit-clarity .clarity-hero{
+  margin:0 0 var(--sp-4);
+}
+:root[data-ui-layout="precision"] .cockpit-clarity .clarity-hero h2{
+  font-size:clamp(var(--fs-title),2.3vw,var(--fs-clarity-title));
+  font-weight:760;
+  letter-spacing:-.025em;
+  margin:var(--sp-1) 0;
+}
+:root[data-ui-layout="precision"] .cockpit-clarity .clarity-eyebrow{
+  font-weight:730;
+  letter-spacing:.045em;
+  text-transform:none;
+}
+:root[data-ui-layout="precision"] .cockpit-clarity .kpi-strip{
+  gap:var(--sp-2);
+  margin-bottom:var(--sp-4);
+}
+:root[data-ui-layout="precision"] .cockpit-clarity .kpi-strip .clarity-kpi{
+  min-height:98px;
+  border-radius:var(--precision-radius);
+  box-shadow:none;
+  padding:var(--sp-3) var(--sp-4);
+  gap:var(--sp-1);
+  border-color:var(--precision-line);
+  transition:border-color .15s ease,background-color .15s ease;
+}
+:root[data-ui-layout="precision"] .cockpit-clarity .kpi-strip .clarity-kpi:hover{
+  transform:none;
+  border-color:var(--accent);
+  background:var(--precision-tint);
+  box-shadow:none;
+}
+:root[data-ui-layout="precision"] .cockpit-clarity .kpi-strip .clarity-kpi .kpi-value{
+  font-size:clamp(var(--fs-kpi),2.8vw,var(--fs-clarity-kpi));
+  font-weight:760;
+  letter-spacing:-.025em;
+}
+:root[data-ui-layout="precision"] .cockpit-clarity .kpi-strip .clarity-kpi .kpi-label{
+  text-transform:none;
+  letter-spacing:0;
+  font-weight:700;
+}
+:root[data-ui-layout="precision"] .cockpit-clarity .clarity-kpi-icon{
+  width:29px;height:29px;flex-basis:29px;
+  border-radius:var(--precision-radius);
+}
+:root[data-ui-layout="precision"] .cockpit-clarity .clarity-kpi-hint{
+  margin-top:0;
+}
+:root[data-ui-layout="precision"] .cockpit-clarity .cockpit-command-grid.clarity-lane-stack{
+  gap:var(--sp-3);
+}
+:root[data-ui-layout="precision"] .cockpit-clarity .clarity-lane{
+  border:1px solid var(--precision-line);
+  border-radius:var(--precision-radius);
+  background:var(--surface);
+  box-shadow:none;
+  padding:var(--sp-3) var(--sp-4);
+}
+:root[data-ui-layout="precision"] .cockpit-clarity .clarity-lane--attention{
+  background:color-mix(in srgb,var(--clarity-attention-bg) 28%,var(--surface));
+}
+:root[data-ui-layout="precision"] .cockpit-clarity .clarity-lane--follow{
+  background:color-mix(in srgb,var(--clarity-follow-bg) 25%,var(--surface));
+}
+:root[data-ui-layout="precision"] .cockpit-clarity .clarity-lane--upcoming{
+  background:color-mix(in srgb,var(--clarity-upcoming-bg) 25%,var(--surface));
+}
+:root[data-ui-layout="precision"] .cockpit-clarity .clarity-lane::before{
+  width:3px;
+}
+:root[data-ui-layout="precision"] .cockpit-clarity .clarity-lane-head{
+  margin-bottom:var(--sp-3);
+  gap:var(--sp-2);
+}
+:root[data-ui-layout="precision"] .cockpit-clarity .clarity-lane-icon{
+  width:34px;height:34px;flex-basis:34px;
+  border-radius:var(--precision-radius);
+}
+:root[data-ui-layout="precision"] .cockpit-clarity .clarity-lane-heading h2{
+  font-size:var(--fs-brand-mobile);
+  font-weight:760;
+  letter-spacing:-.015em;
+}
+:root[data-ui-layout="precision"] .cockpit-clarity .clarity-lane-eyebrow{
+  font-weight:730;
+  letter-spacing:0;
+}
+:root[data-ui-layout="precision"] .cockpit-clarity .clarity-task-list{
+  gap:0;
+  background:var(--surface);
+  border:1px solid var(--precision-line);
+  border-radius:var(--precision-radius);
+  overflow:hidden;
+}
+:root[data-ui-layout="precision"] .cockpit-clarity .clarity-task{
+  min-height:54px;
+  margin:0;
+  border:0;
+  border-bottom:1px solid var(--border-soft);
+  border-radius:0;
+  padding:var(--sp-2) var(--sp-3);
+  box-shadow:none;
+  transition:background-color .15s ease;
+}
+:root[data-ui-layout="precision"] .cockpit-clarity .clarity-task:nth-child(even){
+  background:var(--bg-subtle);
+}
+:root[data-ui-layout="precision"] .cockpit-clarity .clarity-task:last-child{
+  border-bottom:0;
+}
+:root[data-ui-layout="precision"] .cockpit-clarity .clarity-task:hover,
+:root[data-ui-layout="precision"] .cockpit-clarity .clarity-task.is-active{
+  background:var(--accent-bg);
+  box-shadow:inset 2px 0 0 var(--accent);
+}
+:root[data-ui-layout="precision"] .cockpit-clarity .clarity-task-title{
+  font-weight:680;
+}
+:root[data-ui-layout="precision"] .cockpit-clarity .clarity-task-arrow{
+  width:36px;height:36px;flex-basis:36px;
+}
+:root[data-ui-layout="precision"] .cockpit-clarity .clarity-recent .cockpit-recent-disclosure{
+  border:1px solid var(--precision-line);
+  border-radius:var(--precision-radius);
+  box-shadow:none;
+}
+:root[data-ui-layout="precision"] .cockpit-board .board-filterbar,
+:root[data-ui-layout="precision"] .cockpit-week .week-nav{
+  border-bottom:1px solid var(--precision-line);
+  padding-bottom:var(--sp-3);
+}
+:root[data-ui-layout="precision"] .cockpit-week .agenda-lane,
+:root[data-ui-layout="precision"] .cockpit-board .kanban-col{
+  border-radius:var(--precision-radius);
+}
+
+/* 3. L1/L2/L3: high signal density while keeping existing owners and tabs. */
+:root[data-ui-layout="precision"] .node-header{
+  padding-bottom:var(--sp-3);
+  border-bottom:1px solid var(--precision-line);
+}
+:root[data-ui-layout="precision"] .node-header .node-title{
+  letter-spacing:-.018em;
+  font-weight:760;
+}
+:root[data-ui-layout="precision"] .node-header .node-kind{
+  font-weight:650;
+}
+:root[data-ui-layout="precision"] .l1-project-canvas{
+  gap:var(--sp-2);
+}
+:root[data-ui-layout="precision"] .l1-project-canvas .l1-canvas-metrics{
+  gap:var(--sp-2);
+}
+:root[data-ui-layout="precision"] .l1-project-canvas .l1-canvas-metrics > span{
+  min-height:67px;
+  padding:var(--sp-3);
+  background:var(--surface);
+  border:1px solid var(--precision-line);
+  border-radius:var(--precision-radius);
+  box-shadow:none;
+}
+:root[data-ui-layout="precision"] .l1-project-canvas .l1-canvas-metrics > span:first-child.has-attention{
+  background:color-mix(in srgb,var(--st-blocked-bg) 20%,var(--surface));
+  border-inline-start:3px solid var(--st-blocked-fg);
+}
+:root[data-ui-layout="precision"] .l1-project-canvas .l1-project-brief{
+  border-radius:var(--precision-radius);
+}
+:root[data-ui-layout="precision"] .l1-project-canvas .l1-canvas-content{
+  border-color:var(--precision-line);
+  border-radius:var(--precision-radius);
+  box-shadow:none;
+  padding:var(--sp-3);
+}
+:root[data-ui-layout="precision"] .l1-project-canvas .l1-canvas-content[data-l1-panel="notes"],
+:root[data-ui-layout="precision"] .l1-project-canvas .l1-canvas-content[data-l1-panel="materials"]{
+  padding:var(--sp-2);
+}
+:root[data-ui-layout="precision"] .l1-project-canvas .l1-canvas-panel-heading h2{
+  font-weight:780;
+  font-size:var(--fs-tree-section);
+}
+:root[data-ui-layout="precision"] .node-detail-focus .focus-tabs,
+:root[data-ui-layout="precision"] .l1-project-canvas .l1-canvas-tabs{
+  border:0;
+  border-bottom:1px solid var(--precision-line);
+  background:transparent;
+  padding:0;
+  gap:var(--sp-4);
+  box-shadow:none;
+}
+:root[data-ui-layout="precision"] .node-detail-focus .focus-tabs .tab,
+:root[data-ui-layout="precision"] .l1-project-canvas .l1-canvas-tabs .l1-panel-button{
+  border:0;
+  border-radius:0;
+  min-width:0;
+  min-height:44px;
+  padding:var(--sp-2);
+  font-weight:620;
+  font-size:var(--fs-body);
+  color:var(--text-muted);
+  background:transparent;
+  box-shadow:none;
+}
+:root[data-ui-layout="precision"] .node-detail-focus .focus-tabs .tab.is-active,
+:root[data-ui-layout="precision"] .l1-project-canvas .l1-canvas-tabs .l1-panel-button.is-active{
+  color:var(--accent-text);
+  font-weight:780;
+  background:transparent;
+  box-shadow:inset 0 -2px 0 var(--accent);
+}
+:root[data-ui-layout="precision"] .l1-project-canvas .l1-canvas-workstreams{
+  border:1px solid var(--precision-line);
+  border-radius:var(--precision-radius);
+  box-shadow:none;
+  gap:var(--sp-3);
+  padding:var(--sp-3);
+}
+:root[data-ui-layout="precision"] .l1-project-canvas .l1-canvas-workstreams h2{
+  font-size:var(--fs-brand-mobile);
+  font-weight:760;
+  margin:0;
+}
+:root[data-ui-layout="precision"] .l1-project-canvas .l1-canvas-workstream-grid{
+  border-color:var(--precision-line);
+  gap:var(--sp-1);
+}
+:root[data-ui-layout="precision"] .l1-project-canvas .l1-canvas-workstream-card{
+  min-height:54px;
+  border-radius:var(--precision-radius);
+  border:1px solid var(--precision-line);
+  border-inline-start:3px solid var(--accent);
+  background:var(--surface);
+  padding:var(--sp-2) var(--sp-3);
+}
+:root[data-ui-layout="precision"] .l1-project-canvas .l1-canvas-workstream-card:hover{
+  background:var(--precision-tint);
+}
+:root[data-ui-layout="precision"] .focus-metrics{
+  gap:var(--sp-2);
+}
+:root[data-ui-layout="precision"] .focus-metric{
+  min-height:68px;
+  border-radius:var(--precision-radius);
+  box-shadow:none;
+}
+:root[data-ui-layout="precision"] .focus-attention{
+  border-radius:var(--precision-radius);
+  box-shadow:none;
+}
+:root[data-ui-layout="precision"] .focus-attention-list li{
+  border-bottom:1px solid var(--border-soft);
+}
+:root[data-ui-layout="precision"] .task-table .task-list-head{
+  background:var(--bg-subtle);
+  border-bottom:1px solid var(--precision-line);
+  font-weight:700;
+}
+:root[data-ui-layout="precision"] .task-table .task-row{
+  border-bottom:1px solid var(--border-soft);
+}
+:root[data-ui-layout="precision"] .task-table .task-row:nth-child(even){
+  background:var(--bg-subtle);
+}
+:root[data-ui-layout="precision"] .task-table .task-row:hover{
+  background:var(--precision-tint-strong);
+}
+:root[data-ui-layout="precision"] .task-table .task-main .task-title{
+  font-weight:690;
+}
+:root[data-ui-layout="precision"] .quick-due-trigger{
+  border-radius:var(--precision-radius);
+}
+
+/* 4. Notes V3.4: Preserve Section/Page/Editor instances, page history and
+ * Journal linked timeline; use horizontal breathing room to improve reading. */
+:root[data-ui-layout="precision"] .notebook-v3{
+  border:1px solid var(--precision-line);
+  border-radius:var(--precision-radius);
+  background:var(--surface);
+}
+:root[data-ui-layout="precision"] .notebook-v3 .notebook-v34-tabs,
+:root[data-ui-layout="precision"] .notebook-v3 .notebook-section-tabs{
+  background:var(--surface);
+  border-bottom:1px solid var(--precision-line);
+}
+:root[data-ui-layout="precision"] .notebook-v3 .notebook-section-tabs button:not(.notebook-add-tab),
+:root[data-ui-layout="precision"] .notebook-v3 .notebook-v34-tabs button:not(.notebook-add-tab){
+  font-weight:640;
+}
+:root[data-ui-layout="precision"] .notebook-v3 .notebook-section-tabs button:not(.notebook-add-tab).is-active,
+:root[data-ui-layout="precision"] .notebook-v3 .notebook-v34-tabs button:not(.notebook-add-tab).is-active{
+  font-weight:790;
+}
+:root[data-ui-layout="precision"] .notebook-v3 .notebook-onenote-canvas{
+  grid-template-columns:minmax(0,1fr) minmax(190px,225px);
+}
+:root[data-ui-layout="precision"] .notebook-v3 .notebook-onenote-canvas > .notebook-page-sidebar{
+  border-inline-start:1px solid var(--precision-line);
+  background:var(--precision-canvas);
+}
+:root[data-ui-layout="precision"] .notebook-v3 .notebook-page-sidebar-head{
+  border-bottom:1px solid var(--precision-line);
+}
+:root[data-ui-layout="precision"] .notebook-v3 .notebook-page-sidebar .notebook-page-row > button:first-child{
+  border-radius:var(--precision-radius);
+}
+:root[data-ui-layout="precision"] .notebook-v3 .notebook-canvas-tools{
+  border-bottom:1px solid var(--precision-line);
+  background:var(--surface);
+}
+:root[data-ui-layout="precision"] .notebook-v3 .notebook-canvas-editor .note-editor{
+  padding:clamp(22px,3.2vw,44px) clamp(20px,4vw,56px);
+  line-height:1.85;
+  font-size:var(--fs-body);
+  background:var(--surface);
+}
+:root[data-ui-layout="precision"] .notebook-v3 .notebook-canvas-editor .note-editor :is(p,ul,ol,blockquote){
+  max-width:80ch;
+}
+:root[data-ui-layout="precision"] .notebook-v3 .notebook-canvas-editor .notebook-page-history{
+  border-color:var(--precision-line);
+}
+:root[data-ui-layout="precision"] .notebook-v3 .notebook-v34-timeline{
+  background:var(--surface);
+}
+:root[data-ui-layout="precision"] .notebook-v3 .notebook-v34-stream li{
+  border-inline-start:2px solid var(--precision-line);
+  padding-bottom:var(--sp-3);
+}
+:root[data-ui-layout="precision"] .notebook-v3 .notebook-v34-stream li > button{
+  border-radius:var(--precision-radius);
+  border-color:var(--precision-line);
+  padding:var(--sp-3) var(--sp-4);
+  background:var(--surface);
+}
+:root[data-ui-layout="precision"] .notebook-v3 .notebook-v34-stream li.is-selected > button{
+  background:var(--precision-tint-strong);
+  border-color:var(--accent);
+}
+:root[data-ui-layout="precision"] .notebook-v3 .notebook-v34-inspector{
+  background:var(--precision-canvas);
+  border-color:var(--precision-line);
+}
+:root[data-ui-layout="precision"] .notebook-v3 .notebook-v34-readonly{
+  background:var(--surface);
+  border:1px solid var(--precision-line);
+  line-height:1.8;
+}
+:root[data-ui-layout="precision"] .notebook-v3 .notebook-canvas-status{
+  color:var(--text-muted);
+}
+
+/* 5. Materials V3: Focus Stack and Type Accent are retained. */
+:root[data-ui-layout="precision"] .materials-explorer-v3{
+  gap:var(--sp-2);
+}
+:root[data-ui-layout="precision"] .materials-v3-title h2{
+  font-size:clamp(var(--fs-brand-mobile),2.1vw,var(--fs-title));
+  font-weight:770;
+  letter-spacing:-.02em;
+}
+:root[data-ui-layout="precision"] .materials-v3-toolbar{
+  padding:var(--sp-2);
+  border-radius:var(--precision-radius);
+  border-color:var(--precision-line);
+  background:var(--precision-canvas);
+}
+:root[data-ui-layout="precision"] .materials-v3-group{
+  border-color:var(--precision-line);
+  border-radius:var(--precision-radius);
+}
+:root[data-ui-layout="precision"] .materials-v3-group-head{
+  background:var(--precision-canvas);
+  padding:var(--sp-2) var(--sp-3);
+}
+:root[data-ui-layout="precision"] .materials-v3-rows{
+  gap:var(--sp-1);
+}
+:root[data-ui-layout="precision"] .materials-v3-rows > li{
+  border-radius:var(--precision-radius);
+  box-shadow:none;
+  border-inline-start-width:4px;
+}
+:root[data-ui-layout="precision"] .materials-v3-rows > li:hover{
+  background:var(--precision-tint);
+  box-shadow:none;
+}
+:root[data-ui-layout="precision"] .materials-v3-rows > li.is-selected{
+  background:var(--accent-bg);
+  box-shadow:none;
+}
+:root[data-ui-layout="precision"] .materials-v3-row{
+  min-height:59px;
+  padding:var(--sp-2) var(--sp-3);
+}
+:root[data-ui-layout="precision"] .materials-v3-row > .material-format-icon{
+  width:34px;height:36px;flex-basis:34px;
+}
+:root[data-ui-layout="precision"] .materials-v3-file-info{
+  gap:3px;
+}
+:root[data-ui-layout="precision"] .materials-v3-file-info .material-compact-name{
+  font-weight:730;
+}
+:root[data-ui-layout="precision"] .materials-v3-row-actions{
+  border-color:var(--precision-line);
+  background:var(--surface);
+}
+:root[data-ui-layout="precision"] .materials-v3-row-actions .material-icon-btn{
+  min-height:34px;
+  min-width:34px;
+}
+:root[data-ui-layout="precision"] .materials-v3-panel{
+  border-color:var(--precision-line);
+  border-radius:var(--precision-radius);
+  box-shadow:none;
+}
+:root[data-ui-layout="precision"] .materials-v3-panel-head{
+  background:var(--precision-canvas);
+}
+:root[data-ui-layout="precision"] .materials-v3-panel-body{
+  background:var(--surface);
+}
+
+/* 6. Files, Agent Activity/Access, Settings and cross-app dialogs. */
+:root[data-ui-layout="precision"] .filehub-compact-page{
+  max-width:none;
+}
+:root[data-ui-layout="precision"] .filehub-compact-heading h1,
+:root[data-ui-layout="precision"] .agent-activity-heading h1,
+:root[data-ui-layout="precision"] .settings-page-heading h1{
+  font-weight:760;
+  letter-spacing:-.02em;
+}
+:root[data-ui-layout="precision"] .filehub-compact-filters{
+  background:var(--precision-canvas);
+  border:1px solid var(--precision-line);
+  border-radius:var(--precision-radius);
+}
+:root[data-ui-layout="precision"] .material-owner-group{
+  border-color:var(--precision-line);
+  border-radius:var(--precision-radius);
+}
+:root[data-ui-layout="precision"] .material-compact-list{
+  background:var(--surface);
+}
+:root[data-ui-layout="precision"] .material-compact-item:nth-child(even){
+  background:var(--bg-subtle);
+}
+:root[data-ui-layout="precision"] .agent-summary{
+  gap:var(--sp-2);
+}
+:root[data-ui-layout="precision"] .agent-summary-cell,
+:root[data-ui-layout="precision"] .agent-event,
+:root[data-ui-layout="precision"] .agent-provider-section,
+:root[data-ui-layout="precision"] .agent-access-disclosure{
+  border-color:var(--precision-line);
+  border-radius:var(--precision-radius);
+  box-shadow:none;
+}
+:root[data-ui-layout="precision"] .agent-event-timeline{
+  border-color:var(--precision-line);
+}
+:root[data-ui-layout="precision"] .settings-single-page{
+  max-width:none;
+  padding:var(--sp-2) 0;
+}
+:root[data-ui-layout="precision"] .settings-about-card,
+:root[data-ui-layout="precision"] .settings-appearance-card,
+:root[data-ui-layout="precision"] .settings-extra-card{
+  border-color:var(--precision-line);
+  border-radius:var(--precision-radius);
+  box-shadow:none;
+}
+:root[data-ui-layout="precision"] .settings-layout-line{
+  background:var(--precision-canvas);
+  margin:0 0 var(--sp-3);
+  padding:var(--sp-2) var(--sp-3) var(--sp-3);
+  border:1px solid var(--precision-line);
+  border-radius:var(--precision-radius);
+}
+:root[data-ui-layout="precision"] .settings-theme-choice.is-active{
+  background:var(--accent-bg);
+  border-color:var(--accent);
+}
+
+/* 7. Device behavior. Never change data ownership / React subtree. */
+@media(max-width:1179px){
+  :root[data-ui-layout="precision"] .main-scroll{
+    padding:var(--sp-4);
+  }
+  :root[data-ui-layout="precision"] .notebook-v3 .notebook-onenote-canvas{
+    grid-template-columns:minmax(0,1fr) minmax(170px,202px);
+  }
+}
+@media(max-width:779px){
+  :root[data-ui-layout="precision"] .app-shell{
+    --toolbar-h:54px;
+  }
+  :root[data-ui-layout="precision"] .toolbar{
+    padding-inline:var(--sp-2);
+    gap:2px;
+  }
+  :root[data-ui-layout="precision"] .toolbar .btn-icon{
+    min-width:40px;min-height:42px;
+    padding:var(--sp-1);
+  }
+  :root[data-ui-layout="precision"] .toolbar-brand-chinese{
+    font-size:var(--fs-h2);
+  }
+  :root[data-ui-layout="precision"] .main-col{
+    padding:0 var(--sp-1) var(--sp-1);
+  }
+  :root[data-ui-layout="precision"] .main-scroll{
+    padding:var(--sp-3);
+  }
+  :root[data-ui-layout="precision"] .notebook-v3 .notebook-onenote-canvas{
+    grid-template-columns:minmax(0,1fr) minmax(170px,202px);
+  }
+  :root[data-ui-layout="precision"] .materials-v3-row-actions .material-icon-btn{
+    min-width:40px;min-height:40px;
+  }
+}
+@media(max-width:650px){
+  :root[data-ui-layout="precision"] .cockpit-clarity .kpi-strip .clarity-kpi{
+    min-height:96px;padding:var(--sp-3);
+  }
+  :root[data-ui-layout="precision"] .cockpit-clarity .clarity-task{
+    min-height:52px;
+  }
+  :root[data-ui-layout="precision"] .l1-project-canvas .l1-canvas-metrics > span{
+    min-height:67px;
+    padding:var(--sp-2);
+  }
+  :root[data-ui-layout="precision"] .l1-project-canvas .l1-canvas-content{
+    padding:var(--sp-2);
+  }
+  :root[data-ui-layout="precision"] .notebook-v3 .notebook-onenote-canvas{
+    grid-template-columns:minmax(0,1fr);
+  }
+  :root[data-ui-layout="precision"] .notebook-v3 .notebook-canvas-editor .note-editor{
+    padding:var(--sp-4);
+  }
+  :root[data-ui-layout="precision"] .notebook-v3 .notebook-v34-stream li > button{
+    padding:var(--sp-2);
+  }
+  :root[data-ui-layout="precision"] .settings-single-page{
+    padding:var(--sp-2) 0;
+  }
+}
+@media(max-width:440px){
+  :root[data-ui-layout="precision"] .toolbar-brand-logo{
+    width:25px;height:22px;flex-basis:25px;
+  }
+  :root[data-ui-layout="precision"] .toolbar-brand{
+    padding-inline:0;
+    gap:3px;
+  }
+  :root[data-ui-layout="precision"] .toolbar-brand-chinese{
+    font-size:var(--fs-tree-l2);
+    letter-spacing:0;
+  }
+  :root[data-ui-layout="precision"] .toolbar-brand-work,
+  :root[data-ui-layout="precision"] .toolbar-brand-divider{
+    display:none;
+  }
+  :root[data-ui-layout="precision"] .toolbar{
+    gap:0;
+    padding-inline:4px;
+  }
+  :root[data-ui-layout="precision"] .toolbar .btn-icon{
+    min-width:39px;
+    min-height:42px;
+  }
+  :root[data-ui-layout="precision"] .main-scroll{
+    padding:var(--sp-2);
+  }
+  :root[data-ui-layout="precision"] .l1-project-canvas .l1-canvas-tabs,
+  :root[data-ui-layout="precision"] .node-detail-focus .focus-tabs{
+    gap:var(--sp-2);
+  }
+  :root[data-ui-layout="precision"] .l1-project-canvas .l1-canvas-tabs .l1-panel-button,
+  :root[data-ui-layout="precision"] .node-detail-focus .focus-tabs .tab{
+    font-size:var(--fs-compact);
+    padding-inline:var(--sp-1);
+  }
+  :root[data-ui-layout="precision"] .cockpit-clarity .clarity-lane{
+    padding:var(--sp-2);
+  }
+  :root[data-ui-layout="precision"] .cockpit-clarity .clarity-task-right{
+    max-width:100%;
+  }
+  :root[data-ui-layout="precision"] .materials-v3-row{
+    flex-wrap:wrap;
+  }
+  :root[data-ui-layout="precision"] .materials-v3-row-actions{
+    margin-inline-start:auto;
+  }
+}
+
+/* Notes Pages sidebar: clearly labeled Add Page, compact archived toggle. */
+.notebook-v3 .notebook-onenote-canvas .notebook-page-sidebar-head{
+  display:flex;flex-direction:column;align-items:stretch;flex-wrap:nowrap;
+  gap:var(--sp-1);padding:var(--sp-2);min-width:0;
+}
+.notebook-v3 .notebook-page-sidebar-head .notebook-page-tools{
+  display:flex;align-items:center;gap:3px;width:100%;margin:0;min-width:0;
+}
+.notebook-v3 .notebook-page-sidebar-head .notebook-page-tools .notebook-add-page-primary{
+  display:inline-flex;flex:1 1 auto;min-width:0;min-height:36px;
+  align-items:center;justify-content:center;gap:5px;padding:5px 7px;
+  border:1px solid var(--border-strong);border-radius:var(--radius);
+  color:var(--accent-text);background:var(--surface);
+  box-shadow:var(--shadow-sm);font-size:var(--fs-compact);font-weight:750;
+  white-space:nowrap;cursor:pointer;
+}
+.notebook-v3 .notebook-page-sidebar-head .notebook-page-tools .notebook-add-page-primary:hover,
+.notebook-v3 .notebook-page-sidebar-head .notebook-page-tools .notebook-add-page-primary:focus-visible{
+  border-color:var(--accent);background:var(--accent-bg);
+}
+.notebook-v3 .notebook-page-sidebar-head .notebook-page-tools .notebook-add-page-primary>svg{
+  flex:none;color:var(--accent-text);
+}
+.notebook-v3 .notebook-page-sidebar-head .notebook-page-tools .btn-icon{
+  display:inline-flex;justify-content:center;align-items:center;
+  flex:0 0 30px;min-width:30px;min-height:36px;
+  border-radius:var(--radius);color:var(--text-muted);
+}
+.notebook-v3 .notebook-page-sidebar-head .notebook-page-tools .btn-icon:hover,
+.notebook-v3 .notebook-page-sidebar-head .notebook-page-tools .btn-icon:focus-visible{
+  background:var(--bg-hover);color:var(--accent-text);
+}
+.notebook-v3 .notebook-page-sidebar-head .notebook-page-tools .notebook-archived-icon.is-active{
+  color:var(--accent-text);background:var(--accent-bg);
+  outline:1px solid var(--accent);
+}
+.notebook-v3 .notebook-page-sidebar-head .notebook-page-sidebar-count{
+  align-self:flex-start;font-size:var(--fs-compact);font-weight:600;
+  color:var(--text-muted);padding-inline:3px;line-height:1.45;
+}
+
+/* L2 and L3 have one discoverable action cluster in the title row.
+   Activity/Revision now lives inside Actions, not a second ellipsis in tabs. */
+.node-detail-focus .node-actions{
+  display:inline-flex;align-items:center;gap:var(--sp-2);flex-wrap:nowrap;
+}
+.node-detail-focus .node-actions .node-new-task-action,
+.node-detail-focus .node-actions .node-action-menu>.btn{
+  display:inline-flex;flex-direction:row;align-items:center;justify-content:center;
+  gap:var(--sp-2);min-height:38px;min-width:0;padding:var(--sp-2) var(--sp-3);
+  border-radius:var(--radius);font-weight:750;font-size:var(--fs-compact);
+  line-height:1.3;white-space:nowrap;cursor:pointer;
+}
+.node-detail-focus .node-actions .node-new-task-action{
+  background:var(--accent-bg);border:1px solid var(--accent);
+  color:var(--accent-text);box-shadow:none;
+}
+.node-detail-focus .node-actions .node-new-task-action:hover,
+.node-detail-focus .node-actions .node-new-task-action:focus-visible{
+  background:var(--bg-hover);border-color:var(--accent);
+}
+.node-detail-focus .node-actions .node-action-menu>.btn{
+  background:var(--surface);border:1px solid var(--border-strong);
+  color:var(--text);box-shadow:none;
+}
+.node-detail-focus .node-actions .node-action-menu>.btn:hover,
+.node-detail-focus .node-actions .node-action-menu>.btn:focus-visible{
+  background:var(--bg-hover);border-color:var(--accent);
+}
+.node-detail-focus .node-actions .node-action-menu .menu{
+  z-index:65;
+}
+@media(max-width:500px){
+  .node-detail-focus .node-actions{gap:var(--sp-1);margin-inline-start:auto}
+  .node-detail-focus .node-actions .node-new-task-action,
+  .node-detail-focus .node-actions .node-action-menu>.btn{
+    min-height:40px;padding-inline:var(--sp-2);gap:4px;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  :root[data-ui-layout="precision"] .app-shell,
+  :root[data-ui-layout="precision"] .cockpit-clarity .clarity-kpi,
+  :root[data-ui-layout="precision"] .cockpit-clarity .clarity-task,
+  :root[data-ui-layout="precision"] .tree .tree-item[data-tier] > .tree-row{
+    transition:none;
+    animation:none;
+  }
+}

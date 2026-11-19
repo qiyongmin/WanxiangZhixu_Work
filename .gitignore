@@ -1,0 +1,197 @@
+# KB_Work minimum Work-only source distribution.
+# Everything not explicitly allowed is local-only (including live company data).
+# Git-tracked paths must be untracked using "git rm --cached" on a reviewed list.
+# This allowlist does not grant publication or company information-sharing approval.
+
+/*
+!/.gitignore
+# GitHub Actions is the only published CI configuration; the old GitLab
+# pipeline stays local in this working checkout and outside the public snapshot.
+!/.github/
+/.github/*
+!/.github/workflows/
+/.github/workflows/*
+!/.github/workflows/ci.yml
+!/WORKSPACE_KIND
+!/README.md
+!/DEPLOYMENT_WINDOWS_WSL_ZH.md
+!/ARCHITECTURE.md
+!/OPERATIONS.md
+!/SECURITY.md
+!/PUBLIC_RELEASE.md
+!/THIRD_PARTY_NOTICES.md
+!/UI_DESIGN_SYSTEM.md
+!/LICENSE
+!/CONTRIBUTING.md
+!/DEVELOPMENT.md
+!/DATA_MODEL.md
+!/AGENTS.template.md
+!/requirements.txt
+!/index.html
+!/start.sh
+!/stop.sh
+!/start.bat
+!/stop.bat
+
+# The active React/Vite application, all production modules and UI assets.
+# Test files are gated individually; everything else under web/ is source.
+!/web/
+/web/*
+!/web/index.html
+!/web/package.json
+!/web/package-lock.json
+!/web/tsconfig.json
+!/web/tsconfig.node.json
+!/web/vite.config.ts
+!/web/vitest.config.ts
+!/web/src/
+# Legacy vendor-named stylesheet is kept locally for safe rollback only.
+/web/src/styles/eds.css
+!/web/public/
+!/web/scripts/
+!/web/tests/
+/web/tests/*
+!/web/tests/setup.ts
+!/web/tests/helpers.tsx
+!/web/tests/fixtures.ts
+!/web/tests/p2.ts
+!/web/tests/shell.test.tsx
+!/web/tests/design-system.test.tsx
+!/web/tests/agent.test.tsx
+!/web/tests/materials.test.tsx
+!/web/tests/notebook-v3.test.tsx
+!/web/tests/notebook-v34.test.tsx
+!/web/tests/tasks.test.tsx
+!/web/tests/kanban.test.tsx
+!/web/tests/router.test.ts
+!/web/tests/visual-styles.test.tsx
+!/web/tests/ui-layout.test.tsx
+!/web/tests/resources.test.tsx
+!/web/tests/prompt-notebook.test.tsx
+!/web/tests/agent-journal.test.tsx
+!/web/tests/resources-workspaces.test.tsx
+!/web/tests/notebook-v35.test.tsx
+!/web/tests/notebook-table-tools.test.tsx
+
+# All Skills (including generic Work Skills) are local-only. Public GitHub ships only the manager, never Skill content.
+/.agents/
+**/SKILL.md
+
+# Backend runtime import closure, initialization and core operator tools.
+!/tools/
+/tools/*
+!/tools/file_hub.py
+!/tools/gitlab_preflight.py
+!/tools/work_github_public.py
+!/tools/work_github_export.py
+!/tools/kbw.py
+!/tools/office_preview.py
+!/tools/pdf_text.py
+!/tools/project_skills.py
+!/tools/site_boundary.py
+!/tools/stop_server.py
+!/tools/work_backup.py
+!/tools/work_demo.py
+!/tools/work_doctor.py
+!/tools/work_file_open.py
+!/tools/work_housekeeping.py
+!/tools/work_hub_admin.py
+!/tools/work_hub_agent.py
+!/tools/work_hub_api.py
+!/tools/work_hub_ext.py
+!/tools/work_hub_html.py
+!/tools/work_hub_nodes.py
+!/tools/work_hub_notes.py
+!/tools/work_hub_ops.py
+!/tools/work_hub_paths.py
+!/tools/work_hub_repeat.py
+!/tools/work_hub_schema.py
+!/tools/work_hub_sections.py
+!/tools/work_hub_store.py
+!/tools/work_init.py
+# V1.1 dual-mode optional instance/security foundations (no user data).
+!/tools/work_instance_paths.py
+!/tools/work_instance_backup.py
+!/tools/work_skill_layers.py
+!/tools/work_portal_protocol.py
+# AI Resources Hub: generic local-first implementation; never include registry data.
+!/tools/work_resources.py
+!/tools/work_project_skills_local.py
+!/tools/work_prompt_notebook.py
+!/tools/work_resource_import.py
+!/tools/work_resource_deploy.py
+!/tools/work_resource_api.py
+!/tools/work_resources_cli.py
+!/tools/work_resources_mcp.py
+# Historical operator verifier remains tracked for compatibility; no longer invoked by the personal UI/API.
+!/tools/work_resources_authority.py
+!/tools/work_resource_common.py
+!/tools/work_material_storage.py
+!/tools/work_migrate.py
+!/tools/work_notebook.py
+!/tools/work_notebook_v34.py
+!/tools/work_notebook_v35.py
+!/tools/work_notebook_purge.py
+!/tools/work_provider_vault.py
+!/tools/work_release_gate.py
+!/tools/work_server.py
+!/tools/work_server_health.py
+!/tools/work_shell.py
+!/tools/work_shortcuts.py
+!/tools/work_source_audit.py
+
+# Small quality gate only. Historic/phase-specific Python & browser tests
+# remain locally available but are not part of a colleague runtime clone.
+!/tests/
+/tests/*
+!/tests/pbt.py
+!/tests/work_fixture.py
+!/tests/work_v2_common.py
+!/tests/work_empty_clone.browser.cjs
+!/tests/test_work_backup_private.py
+!/tests/test_work_clean_init.py
+!/tests/test_work_dual_mode.py
+!/tests/test_work_v11_skills_backup.py
+!/tests/test_work_portal_protocol.py
+!/tests/test_work_resources_hub.py
+!/tests/test_work_prompt_notebook.py
+!/tests/test_work_resources_http.py
+!/tests/test_work_resources_project_skills.py
+!/tests/test_work_project_skills_local.py
+!/tests/test_work_activity_journal.py
+!/tests/test_work_ui_design_system.py
+!/tests/test_work_demo.py
+!/tests/test_work_notebook_v34.py
+!/tests/test_work_notebook_v35.py
+!/tests/test_work_notebook_purge.py
+!/tests/test_work_doctor.py
+!/tests/test_work_folder_bridge.py
+!/tests/test_work_gitlab_fresh_clone.py
+!/tests/test_work_housekeeping.py
+!/tests/test_work_install_docs.py
+!/tests/test_work_office_headless_smoke.py
+!/tests/test_work_source_audit.py
+!/tests/test_work_github_public.py
+!/tests/test_work_v2_agent.py
+!/tests/test_work_v2_materials.py
+!/tests/test_work_v2_nodes.py
+!/tests/test_work_v2_release_gate.py
+
+# Explicit no-go paths even if future rules are accidentally relaxed.
+# /web/public/ and /web/src/ are generic, but retired UI prototypes are not.
+/web/public/initiative-level1-v1.html
+/web/public/initiative-level1-v1.js
+
+# Never stage local environment files or caches even beneath allowed folders.
+**/.env
+**/.env.*
+**/*.sqlite3
+**/*.sqlite3-*
+**/*.pem
+**/*.key
+**/__pycache__/
+**/*.pyc
+**/node_modules/
+**/coverage/
+**/test-results/
+**/.DS_Store

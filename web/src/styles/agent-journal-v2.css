@@ -1,0 +1,92 @@
+/* Agent Access V2.2: unified local audit timeline */
+.agent-access-tabs{display:flex;align-items:center;gap:5px;margin:-2px 0 17px;
+  padding:4px;background:var(--bg-subtle);border:1px solid var(--border);
+  border-radius:10px;width:max-content;max-width:100%;flex-wrap:wrap}
+.agent-access-tabs>a{display:flex;align-items:center;justify-content:center;min-height:36px;
+  padding:8px 16px;color:var(--text-muted);font-size:12px;font-weight:750;
+  border:1px solid transparent;border-radius:7px;text-decoration:none}
+.agent-access-tabs>a:hover{color:var(--text);background:var(--bg-hover)}
+.agent-access-tabs>a.is-active{background:var(--surface);color:var(--accent-text);
+  border-color:var(--border);box-shadow:0 1px 3px color-mix(in srgb,var(--text) 8%,transparent)}
+.agent-journal{display:grid;gap:14px;min-width:0}
+.agent-journal-intro{display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:10px}
+.agent-journal-intro h2{font-size:21px;margin:0 0 4px;letter-spacing:-.02em}
+.agent-journal-intro p{font-size:12px;margin:0;line-height:1.5}
+.agent-journal-toolbar{display:flex;justify-content:space-between;align-items:center;
+  gap:10px;flex-wrap:wrap}
+.agent-journal-filters{display:flex;gap:4px;background:var(--bg-subtle);
+  border:1px solid var(--border);padding:4px;border-radius:8px;flex-wrap:wrap}
+.agent-journal-filters button{border:1px solid transparent;background:transparent;
+  padding:7px 11px;border-radius:6px;cursor:pointer;color:var(--text-muted);
+  font-size:11px;font-weight:730;white-space:nowrap}
+.agent-journal-filters button:hover{color:var(--text)}
+.agent-journal-filters button.is-active{color:var(--accent-text);background:var(--surface);
+  border-color:var(--border)}
+.agent-journal-search{display:flex;align-items:center;gap:8px;flex:1 1 245px;
+  max-width:410px;min-height:39px;padding:0 11px;background:var(--surface);
+  border:1px solid var(--border-strong);border-radius:8px}
+.agent-journal-search svg{flex-shrink:0;color:var(--text-muted)}
+.agent-journal-search input{width:100%;min-width:0;border:0;background:transparent;
+  color:var(--text);font-size:12px;outline:0}
+.agent-journal-source-summaries{display:flex;align-items:center;gap:9px;flex-wrap:wrap;
+  border:1px solid var(--border);background:var(--bg-subtle);
+  padding:11px 12px;border-radius:9px;color:var(--text);font-size:11px}
+.agent-journal-source-summaries>strong{font-size:11px;font-weight:780;flex:1 1 225px}
+.agent-journal-source-summaries>span{display:inline-flex;align-items:center;gap:5px;flex-wrap:wrap;
+  padding:5px 8px;background:var(--surface);border:1px solid var(--border);
+  border-radius:6px;font-size:11px;color:var(--text-muted)}
+.agent-journal-source-summaries b{font-size:12px;color:var(--accent-text)}
+.agent-journal-source-summaries code{font-size:10px}
+.agent-journal-privacy{display:flex;align-items:flex-start;gap:8px;font-size:11px;
+  line-height:1.6;color:var(--text-muted);border-left:2px solid var(--border-strong);
+  margin:0;padding:4px 12px}
+.agent-journal-privacy svg{flex:0 0 15px;margin-top:2px}
+.agent-journal-days{display:grid;gap:16px;min-width:0}
+.agent-journal-day{display:grid;gap:9px;min-width:0}
+.agent-journal-day h3{display:flex;align-items:center;gap:8px;font-size:12px;
+  margin:0;color:var(--text-muted);font-weight:790}
+.agent-journal-day h3 span{font-size:10px;border-radius:5px;
+  padding:3px 6px;background:var(--bg-subtle);border:1px solid var(--border)}
+.agent-journal-events{list-style:none;margin:0;padding:0;display:grid;gap:5px}
+.agent-journal-event{display:flex;align-items:flex-start;gap:11px;
+  padding:12px 13px;border:1px solid var(--border);background:var(--surface);
+  border-radius:9px;min-width:0}
+.agent-journal-event:hover{border-color:var(--border-strong);background:var(--bg-subtle)}
+.agent-journal-icon{display:grid;place-items:center;flex:0 0 32px;width:32px;
+  height:32px;border-radius:8px;background:var(--accent-bg);color:var(--accent-text)}
+.agent-journal-event[data-source=agent] .agent-journal-icon{background:var(--bg-subtle);
+  border:1px solid var(--border);color:var(--text-muted)}
+.agent-journal-icon svg{width:16px;height:16px}
+.agent-journal-event-body{display:grid;gap:5px;flex:1;min-width:0}
+.agent-journal-event-top{display:flex;align-items:center;justify-content:space-between;
+  gap:12px;flex-wrap:wrap}
+.agent-journal-event-top strong{font-size:12px;color:var(--text);line-height:1.35}
+.agent-journal-event-top time{font-size:10px;color:var(--text-muted);
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+.agent-journal-target{font-size:12px;color:var(--text);
+  font-weight:650;overflow-wrap:anywhere}
+.agent-journal-target a{color:var(--accent-text);text-decoration:none}
+.agent-journal-target a:hover{text-decoration:underline}
+.agent-journal-event-meta{display:flex;flex-wrap:wrap;gap:6px}
+.agent-journal-event-meta span{font-size:10px;color:var(--text-muted);
+  border:1px solid var(--border);background:var(--bg-subtle);padding:3px 7px;
+  border-radius:5px;overflow-wrap:anywhere}
+.agent-journal-detail{margin:0;color:var(--text-muted);font-size:11px;
+  overflow-wrap:anywhere;line-height:1.5}
+.agent-journal-bottom{display:flex;gap:8px;flex-wrap:wrap}
+.agent-activity-embedded{display:grid;gap:var(--sp-3);margin-top:12px;
+  padding-top:18px;border-top:1px solid var(--border);min-width:0}
+.agent-activity-embedded .agent-activity-heading h2{font-size:19px;margin:0 0 4px}
+.agent-activity-embedded .agent-activity-header{margin-bottom:0}
+@container (max-width:620px){
+ .agent-journal-toolbar{align-items:stretch;flex-direction:column}
+ .agent-journal-search{max-width:none;width:100%;flex:1}
+ .agent-journal-filters{justify-content:space-around}
+ .agent-journal-filters button{flex:1}
+ .agent-journal-event{padding:10px;gap:9px}
+ .agent-journal-event-top{gap:5px}
+ .agent-journal-event-meta span{max-width:100%}
+ .agent-access-tabs{width:100%}
+ .agent-access-tabs>a{flex:1}
+}

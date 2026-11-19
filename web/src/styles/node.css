@@ -1,0 +1,232 @@
+/* Node_Detail、表单与 Tab：只使用 var(--…)。 */
+.node-detail {
+  max-width: 880px;
+}
+
+.node-detail > * + * {
+  margin-top: var(--sp-3);
+}
+
+.breadcrumb {
+  overflow: hidden;
+  white-space: nowrap;
+  color: var(--text-muted);
+}
+
+.breadcrumb ol {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.breadcrumb li + li::before {
+  content: "›";
+  padding: 0 var(--sp-2);
+  color: var(--text-muted);
+}
+
+.breadcrumb li:last-child {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--text);
+}
+
+.node-header > * + * {
+  margin-top: var(--sp-2);
+}
+
+.node-title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.node-title {
+  font-size: var(--fs-title);
+  overflow-wrap: anywhere;
+}
+
+.node-description {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.node-actions,
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.inline-confirm {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.banner {
+  margin: 0;
+  padding: var(--sp-2) var(--sp-3);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--st-waiting-bg);
+  color: var(--st-waiting-fg);
+}
+
+.btn-danger {
+  border-color: var(--st-blocked-fg);
+  background: var(--st-blocked-bg);
+  color: var(--st-blocked-fg);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+
+.field input,
+.form textarea {
+  width: 100%;
+  padding: var(--sp-1) var(--sp-2);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.field [aria-invalid="true"],
+.form textarea[aria-invalid="true"] {
+  border-color: var(--st-blocked-fg);
+}
+
+.field-error {
+  margin: 0;
+}
+
+.conflict {
+  padding: var(--sp-3);
+  border: 1px solid var(--st-blocked-fg);
+  border-radius: var(--radius);
+  background: var(--st-blocked-bg);
+  color: var(--text);
+}
+
+.conflict > * + * {
+  margin-top: var(--sp-2);
+}
+
+.diff-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.diff-table th,
+.diff-table td {
+  padding: var(--sp-1) var(--sp-2);
+  border: 1px solid var(--border-strong);
+  text-align: start;
+  vertical-align: top;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+/* ---- Tab ---- */
+.tabs {
+  display: flex;
+  gap: var(--sp-1);
+  border-bottom: 1px solid var(--border);
+}
+
+.tab {
+  padding: var(--sp-2) var(--sp-3);
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.tab:hover {
+  background: var(--bg-hover);
+}
+
+.tab.is-active {
+  border-bottom-color: var(--accent);
+  color: var(--accent-text);
+  font-weight: 600;
+}
+
+.tabpanel {
+  padding-top: var(--sp-2);
+}
+
+.tab-stack > * + * {
+  margin-top: var(--sp-4);
+}
+
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-2);
+}
+
+.summary-html {
+  overflow-wrap: anywhere;
+}
+
+.item-list,
+.activity-list,
+.stat-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item-list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-1) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.activity-list li {
+  padding: var(--sp-2) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.stat-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-4);
+}
+
+.note-plain {
+  white-space: pre-wrap;
+}
+
+.settings-group {
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+}
+
+.radio-row {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-1) 0;
+}

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="250" viewBox="0 0 1280 250" preserveAspectRatio="xMidYMid slice">
+<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#b4d8cb" stop-opacity=".70"/><stop offset="1" stop-color="#e7f5eb" stop-opacity="0"/></linearGradient>
+  <linearGradient id="m1" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#5a998b" stop-opacity=".44"/><stop offset="1" stop-color="#b8d8ca" stop-opacity=".07"/></linearGradient>
+  <linearGradient id="m2" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#346c64" stop-opacity=".52"/><stop offset="1" stop-color="#88ae9d" stop-opacity=".1"/></linearGradient>
+  <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1"><stop stop-color="white" stop-opacity="1"/><stop offset="1" stop-color="white" stop-opacity="0"/></linearGradient>
+  <mask id="soft"><rect width="1280" height="250" fill="url(#fade)"/></mask>
+</defs>
+<g mask="url(#soft)">
+<path d="M0 0h1280v250H0z" fill="url(#sky)"/>
+<circle cx="991" cy="74" r="44" fill="#f2f8de" opacity=".48"/>
+<path d="M220 230 480 95 555 130 687 53 835 152 932 104 1055 177 1280 84V250H220Z" fill="url(#m1)"/>
+<path d="m520 250 255-129 62 33 145-116 102 88 116-34 80 59v99H520Z" fill="url(#m2)"/>
+<path d="m825 250 210-95 86 28 159-86v153Z" fill="#2b6157" opacity=".20"/>
+<g stroke="#457d6f" stroke-width="2" fill="none" opacity=".22"><path d="M1020 195c62 8 131 0 260-44M870 212c117 0 201-11 280-42M920 235c140-9 208-23 340-49"/></g>
+</g></svg>

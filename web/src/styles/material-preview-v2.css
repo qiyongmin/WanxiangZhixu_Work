@@ -1,0 +1,52 @@
+/* Work-only Materials Preview V2.1: inline, enlarged and separate view affordances.
+ * All color/spacing primitives reuse KBW tokens. Never inject HTML into the host DOM. */
+.preview-stage { display: flex; flex-direction: column; gap: var(--sp-2); min-height: 0; min-width: 0; width: 100%; }
+.preview-actions {
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-2);
+  background: var(--surface); padding: var(--sp-2);
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 4;
+}
+.preview-actions .btn { min-height: 34px; font-size: var(--fs-compact); white-space: nowrap; }
+.preview-file-name {
+  min-width: 0; flex: 1 1 120px; overflow: hidden;
+  text-overflow: ellipsis; white-space: nowrap; font-weight: 650;
+}
+.preview-stage > .preview-body {
+  display: flex; flex-direction: column; min-height: 280px; height: auto; flex: 1 1 auto;
+}
+.preview-stage .preview-frame {
+  display: block; flex: 1 1 auto; border: 1px solid var(--border);
+  width: 100%; min-height: 52vh; height: 60vh;
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.preview-stage .preview-frame[hidden] { display: none !important; }
+.preview-stage .preview-image { max-width: 100%; max-height: 70vh; object-fit: contain; }
+.preview-stage .preview-legacy { font-size: var(--fs-compact); }
+.preview-extracted { min-width: 0; width: 100%; }
+.preview-extracted > p { margin: var(--sp-2) 0; font-size: var(--fs-compact); }
+.preview-extracted .preview-text { white-space: pre-wrap; overflow-wrap: anywhere; max-width: 100%; max-height: 62vh; overflow: auto; }
+.preview-stage.is-maximized .preview-extracted .preview-text { max-height: calc(100dvh - 150px); }
+.preview-stage.is-maximized {
+  position: fixed; inset: 0; z-index: 1000; width: 100vw; height: 100dvh;
+  overflow: hidden; padding: var(--sp-2); background: var(--surface);
+  box-shadow: var(--shadow-md);
+}
+.preview-stage.is-maximized > .preview-body { min-height: 0; overflow: auto; }
+.preview-stage.is-maximized .preview-frame { height: 100%; min-height: 0; flex: 1 1 0; }
+.preview-stage.is-maximized .preview-image { max-height: calc(100dvh - 100px); }
+.preview-stage.is-maximized .preview-actions { top: 0; }
+.focus-document-preview .focus-preview-content .preview-stage { min-height: 58vh; }
+.focus-document-preview .focus-preview-content .preview-body { height: auto; }
+.focus-document-preview .focus-preview-content .preview-frame { min-height: 58vh; }
+.focus-document-preview .focus-preview-content .preview-stage.is-maximized .preview-frame { min-height: 0; height: 100%; }
+dialog.drawer .preview-stage.is-maximized { z-index: 100; }
+dialog.drawer .drawer-content { min-height: 0; }
+@media (max-width: 779px) {
+  .preview-actions { gap: var(--sp-1); }
+  .preview-actions .btn { min-height: 44px; }
+  .preview-file-name { flex-basis: 100%; }
+  .preview-stage .preview-frame { min-height: 52dvh; }
+  .preview-stage.is-maximized .preview-frame { min-height: 0; height: 100%; }
+}

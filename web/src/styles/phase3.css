@@ -1,0 +1,262 @@
+/* Phase 3：Notes、资料与 Preview_Drawer、Summary 历史、Agent 动态/接入、Proposals。仅通过 var(--…) 取值。 */
+.notes-toolbar,
+.materials-add {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--sp-2);
+}
+.notes-error {
+  padding: var(--sp-2) var(--sp-3);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+}
+.note-list > * + * {
+  margin-top: var(--sp-3);
+}
+.note-card {
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.note-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-3);
+  background: var(--bg-subtle);
+}
+.note-toggle {
+  flex: 1 1 auto;
+  justify-content: flex-start;
+  text-align: start;
+}
+.note-body {
+  padding: var(--sp-3);
+}
+.note-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-1);
+  margin-block: var(--sp-2);
+}
+.note-editor {
+  min-height: 8rem;
+  padding: var(--sp-2) var(--sp-3);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+}
+.note-editor img {
+  max-width: 100%;
+  height: auto;
+}
+.note-editor pre,
+.summary-html pre {
+  overflow-x: auto;
+  padding: var(--sp-2);
+  background: var(--bg-sunken);
+  font-family: var(--font-mono);
+}
+.note-editor blockquote,
+.summary-html blockquote {
+  margin-inline: 0;
+  padding-inline-start: var(--sp-3);
+  border-inline-start: 3px solid var(--border-strong);
+  color: var(--text-muted);
+}
+
+/* 「Agent 写入·未确认」 */
+.flag-unconfirmed {
+  border: 1px solid var(--accent-text);
+  color: var(--accent-text);
+  background: var(--accent-bg);
+}
+.unconfirmed-controls {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2);
+}
+.unconfirmed-feed {
+  margin-block-end: var(--sp-4);
+  padding: var(--sp-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.unconfirmed-feed h2 {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin-top: 0;
+}
+.feed-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.feed-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  padding: var(--sp-2) var(--sp-3);
+  border-bottom: 1px solid var(--border);
+}
+.write-reason {
+  flex-basis: 100%;
+}
+
+/* 资料 */
+.material-list li {
+  align-items: center;
+}
+.material-title {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+/* Preview_Drawer：原生 <dialog> 样式化为右侧抽屉 */
+dialog.drawer {
+  position: fixed;
+  inset-block: 0;
+  inset-inline-start: auto;
+  inset-inline-end: 0;
+  margin: 0;
+  width: min(50rem, 96vw);
+  max-width: 96vw;
+  height: 100vh;
+  max-height: 100vh;
+  padding: 0;
+  display: none;
+  flex-direction: column;
+  border-radius: 0;
+}
+dialog.drawer[open] {
+  display: flex;
+}
+.drawer-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-2);
+  padding: var(--sp-3) var(--sp-4);
+  border-bottom: 1px solid var(--border);
+}
+.drawer-title {
+  margin: 0;
+  font-size: var(--fs-title);
+  overflow-wrap: anywhere;
+}
+.drawer-content {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  padding: var(--sp-3) var(--sp-4);
+}
+.preview-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  height: 100%;
+}
+.preview-frame {
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 24rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.preview-frame[hidden],
+.preview-image[hidden] {
+  display: none;
+}
+.preview-image {
+  max-width: 100%;
+  height: auto;
+  align-self: flex-start;
+}
+.preview-text {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-family: var(--font-mono);
+}
+.preview-card dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: var(--sp-1) var(--sp-3);
+  margin: 0 0 var(--sp-3);
+}
+.preview-card dt {
+  color: var(--text-muted);
+}
+.preview-card dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.preview-missing {
+  font-weight: 600;
+}
+
+/* 确认对话框 */
+.confirm-dialog {
+  max-width: 32rem;
+}
+
+/* Agent 动态 / 接入 / Proposals */
+.agent-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  align-items: flex-end;
+}
+.agent-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.agent-table th,
+.agent-table td {
+  padding: var(--sp-1) var(--sp-3);
+  border-bottom: 1px solid var(--border);
+  text-align: start;
+  vertical-align: top;
+  overflow-wrap: anywhere;
+}
+.cli-example {
+  font-family: var(--font-mono);
+  font-size: var(--fs-compact);
+}
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sp-2);
+}
+.proposal-card {
+  margin-block: var(--sp-3);
+  padding: var(--sp-3);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+}
+.proposal-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2);
+}
+.proposal-head h2 {
+  margin: 0;
+  font-size: var(--fs-h2);
+}
+.diff-before {
+  background: var(--st-blocked-bg);
+  color: var(--st-blocked-fg);
+}
+.diff-after {
+  background: var(--st-done-bg);
+  color: var(--st-done-fg);
+}
+.summary-excerpt {
+  overflow-wrap: anywhere;
+}

@@ -1,0 +1,51 @@
+/* L1 Explorer and L2/L3 Focus nodes use the 2-column workspace.
+ * Other app pages retain their original inspector layout. */
+.app-shell[data-full-width-focus="true"] {
+  --right-w: 0px;
+  --right-w-open: 0px;
+  grid-template-columns: [left] var(--left-w) [main] minmax(0, 1fr) [right] 0px;
+}
+.app-shell[data-full-width-focus="true"] .pane-right,
+.app-shell[data-full-width-focus="true"] .pane-resizer-right { display: none; }
+.node-detail-focus .focus-tabs {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  margin-top: var(--sp-3);
+  padding-top: var(--sp-2);
+  background: var(--surface);
+  overflow-x: auto;
+  scrollbar-width: thin;
+  white-space: nowrap;
+}
+.node-detail-focus .focus-tabs .tab { flex: 0 0 auto; min-height: 44px; }
+.focus-property-zone { border-bottom: 1px solid var(--border-soft); padding: 10px 0; }
+.focus-properties-summary { display: flex; gap: 8px 20px; flex-wrap: wrap; color: var(--text-muted); font-size: var(--fs-compact); }
+.focus-properties-summary strong { color: var(--text); margin-left: 4px; }
+.focus-property-details { margin-top: 6px; }
+.focus-property-details > summary {
+  cursor: pointer;
+  color: var(--accent-text);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 0;
+  font-size: var(--fs-compact);
+}
+.focus-property-details > .inspector { margin: 10px 0; max-width: 800px; padding: 14px; border-radius: var(--radius-lg); border: 1px solid var(--border); }
+.focus-tab-content { min-width: 0; }
+.focus-shared-notes { padding: 13px 16px; margin-top: 16px; border: 1px solid var(--border); border-radius: var(--radius); }
+.focus-shared-notes summary { cursor: pointer; }
+.focus-shared-notes nav { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+@media (min-width: 780px) and (max-width: 1179px) {
+  .app-shell[data-full-width-focus="true"] {
+    grid-template-columns: [left] var(--left-w) [main] minmax(0, 1fr) [right] 0px;
+  }
+}
+@media (max-width: 779px) {
+  .app-shell[data-full-width-focus="true"] {
+    grid-template-columns: 0 minmax(0,1fr) 0;
+  }
+  .node-detail-focus .focus-tabs { margin-inline: 0; }
+  .focus-properties-summary { gap: 8px 12px; }
+}

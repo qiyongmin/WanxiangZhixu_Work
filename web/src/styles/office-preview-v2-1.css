@@ -1,0 +1,19 @@
+/* Work-only Office read-only preview. All paints inherit the four existing themes. */
+.office-preview { width: 100%; min-width: 0; }
+.office-preview-modes, .office-sheet-tabs, .office-sheet-paging {
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-2); margin: var(--sp-3) 0;
+}
+.office-sheet-tabs { overflow-x: auto; flex-wrap: nowrap; padding-bottom: var(--sp-2); }
+.office-sheet-tabs .btn { flex: 0 0 auto; white-space: nowrap; }
+.office-preview .btn.is-active { border-color: var(--accent); background: var(--accent-bg); color: var(--accent-text); }
+.office-sheet-scroll { width: 100%; max-height: 65vh; overflow: auto; border: 1px solid var(--border); border-radius: var(--radius); }
+.office-sheet-scroll:focus { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+.office-sheet-table { border-collapse: separate; border-spacing: 0; table-layout: auto; width: max-content; min-width: 100%; font-size: var(--fs-compact); }
+.office-sheet-table td, .office-sheet-table th { padding: 8px 12px; border-right: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft); max-width: 290px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.office-sheet-table thead th { position: sticky; top: 0; z-index: 2; background: var(--bg-sunken); font-weight: 700; }
+.office-sheet-table tbody th { position: sticky; left: 0; z-index: 1; background: var(--bg-subtle); color: var(--text-muted); }
+.office-sheet-table thead th:first-child { left: 0; z-index: 3; }
+.office-sheet-table td { background: var(--surface); }
+.office-pdf-preview .preview-frame { display: block; width: 100%; min-height: 68vh; border: 1px solid var(--border); }
+.office-sheet-paging .btn { min-height: 40px; }
+@media(max-width:779px){ .office-preview-modes .btn { min-height:44px; } .office-sheet-scroll { max-height:55vh; } }
