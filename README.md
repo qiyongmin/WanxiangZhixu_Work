@@ -3,8 +3,6 @@
 **One local-first workspace for projects, tasks, notes, files and follow-ups.**  
 A structured Work cockpit that connects actions and supporting materials without replacing Microsoft Teams, SharePoint or company systems.
 
-> **Release boundary:** This remains a **single-user, localhost-only development application**. The new target is a **public GitHub source-only repository** with all Work data, Skills, Prompts, MCP/Agent resources and credentials excluded. **The repository is licensed under MIT (see [LICENSE](LICENSE)); the remaining release requirements are a clean Git history, privacy/source audit, dependency-license review and isolated-clone verification.** See [Public Source Release Checklist](PUBLIC_RELEASE.md). Do not expose the unauthenticated service to a LAN, VPN, tunnel or the Internet.
-
 ### Dual deployment modes · Blueprint V1.1 (implementation status)
 
 **Mode A — Standalone Local is the default and must never depend on Central Portal.** Clone the source, install dependencies, build and run `./start.sh` exactly as before; existing local SQLite/File Hub paths and all existing user data remain unchanged. No Portal account, device PIN, enterprise gateway or server availability is required.
