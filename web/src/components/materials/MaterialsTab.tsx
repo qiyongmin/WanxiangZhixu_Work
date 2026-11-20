@@ -16,6 +16,7 @@ import { navigate, nodePath, useAppPath } from '../../lib/router';
 import { UnconfirmedControls } from '../agent/UnconfirmedMark';
 import { FileVersionTools } from '../preview/FileVersionTools';
 import { OpenStorageLocation } from '../preview/OpenStorageLocation';
+import { OpenNativeFile } from '../preview/OpenNativeFile';
 import { PreviewContent, type PreviewTarget } from '../preview/PreviewDrawer';
 import { MaterialFormatIcon } from './MaterialFormatIcon';
 
@@ -300,7 +301,7 @@ export function MaterialsTab({ node }: { node: NodeDTO }) {
           <button type="button" className="material-icon-btn" title="预览" aria-label={`Preview: ${entry.title}`}
             disabled={!target || entry.missing} aria-pressed={opened && active.kind === 'preview' && !active.maximize}
             onClick={() => choose(entry, 'preview')}><Icon name="eye" size={17}/></button>
-          {isFile && target && !entry.missing ? <OpenStorageLocation fileId={target.fileId} name={entry.title}/> : null}
+          {isFile && target && !entry.missing ? <><OpenNativeFile fileId={target.fileId} name={entry.title}/><OpenStorageLocation fileId={target.fileId} name={entry.title}/></> : null}
           {isFile && target ? <button type="button" className="material-icon-btn" title="版本历史（只读）"
             aria-label={`Version history: ${entry.title}`}
             aria-pressed={opened && active.kind === 'history'} onClick={() => choose(entry, 'history')}>

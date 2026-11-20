@@ -13,6 +13,7 @@ import { Icon } from '../icons';
 import { ModalDialog } from '../ModalDialog';
 import { useAppPath, navigate, nodePath } from '../../lib/router';
 import { OpenStorageLocation } from '../preview/OpenStorageLocation';
+import { OpenNativeFile } from '../preview/OpenNativeFile';
 import { FileVersionTools } from '../preview/FileVersionTools';
 import { PreviewContent } from '../preview/PreviewDrawer';
 import { MaterialFormatIcon, materialFormatOf } from './MaterialFormatIcon';
@@ -62,6 +63,12 @@ export function MaterialsExplorerV3({ node }: { node: NodeDTO }) {
   const [loadingMore, setLoadingMore] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [info, setInfo] = useState<string | null>(null);
+  // Success feedback is brief; errors are kept until the user dismisses them.
+  useEffect(() => {
+    if (!info) return undefined;
+    const timer = window.setTimeout(() => setInfo(null), 5000);
+    return () => window.clearTimeout(timer);
+  }, [info]);
   const [busy, setBusy] = useState(false);
   const [selectedKey, setSelectedKey] = useState<string | null>(null);
   const [panelTab, setPanelTab] = useState<PanelTab>('preview');
@@ -406,14 +413,20 @@ export function MaterialsExplorerV3({ node }: { node: NodeDTO }) {
       <span className="muted">只能解除当前节点直接关联，不删除文件原件。</span>
     </div>:null}
     {legacyBackend?<p className="error-text" role="status">Work Server 仍在运行旧版后端。Materials 暂时使用只读兼容显示；请重启本机 KB_Work 服务后启用 V3.0 的关联、搜索、上传与元数据功能。</p>:null}
-    {error?<p className="error-text" role="alert">{error}</p>:null}
-    {info?<p role="status" className="materials-v3-info">{info}</p>:null}
+    {error?<div className="error-text materials-v3-feedback" role="alert">
+      <span>{error}</span><button type="button" className="btn" aria-label="关闭 Materials 错误提示"
+        onClick={() => setError(null)}>×</button>
+    </div>:null}
+    {info?<div role="status" className="materials-v3-info materials-v3-feedback">
+      <span>{info}</span><button type="button" className="btn" aria-label="关闭 Materials 成功提示"
+        onClick={() => setInfo(null)}>×</button>
+    </div>:null}
     {query.status==='error'?<p role="alert" className="error-text">Materials 加载失败：{describeError(query.error)}</p>:null}
     {!query.data?<p className="muted" role="status">读取 Materials…</p>:null}
     <div ref={workspaceRef} style={{'--materials-list-ratio': listWidth+'%'} as CSSProperties}
       className={`materials-v3-workspace ${selected?'has-preview':''} ${panelFull?'is-full':''}`}>
       <div className="materials-v3-list-area">
-        <div className="materials-v3-summary"><strong>{query.data?.total ?? 0} 份关联资料</strong><span className="muted">点击文件名预览 · 当前层级优先 · 上层资料只读</span></div>
+        <div className="materials-v3-summary"><strong>{query.data?.total ?? 0} 份关联资料</strong><span className="muted">点击文件名预览 · Windows 打开 = 使用主机默认应用打开原件 · 上层资料只读</span></div>
         {groups.map(group=>{
           const entries=group.entries;
           const defaultOpen = !group.inherited || (group.level===node.depth-1 && entries.length<=5);
@@ -456,7 +469,7 @@ export function MaterialsExplorerV3({ node }: { node: NodeDTO }) {
                     </div>:null}
                   </div>
                   <div className="materials-v3-row-actions" role="group" aria-label={`File actions: ${entry.title}`}>
-                    {entry.fileId&&!entry.missing?<OpenStorageLocation fileId={entry.fileId} name={entry.title}/>:null}
+                    {entry.fileId&&!entry.missing?<><OpenNativeFile fileId={entry.fileId} name={entry.title}/><OpenStorageLocation fileId={entry.fileId} name={entry.title}/></>:null}
                     {entry.fileId?<button className="material-icon-btn" title="版本历史" type="button" onClick={()=>choose(entry,'history')}><Icon name="history" size={17}/></button>:null}
                     {!group.inherited ? <button className="material-icon-btn materials-v3-unlink" type="button"
                       title="解除当前层级关联（保留原件）" aria-label={`解除关联: ${entry.title}`}

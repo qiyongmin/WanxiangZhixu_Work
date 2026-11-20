@@ -28,6 +28,11 @@
  border:1px solid var(--border);border-radius:var(--radius);padding:var(--sp-2) var(--sp-3);
  color:var(--text);background:var(--surface)}
 .notebook-event-summary{grid-column:1/-1;display:grid;gap:var(--sp-2);min-width:0}
+.notebook-event-summary-heading{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.notebook-event-summary-heading span{font-size:var(--fs-compact);font-weight:400;color:var(--text-muted)}
+.notebook-event-content a{color:var(--accent-text);text-decoration:underline;text-underline-offset:2px;cursor:pointer;overflow-wrap:anywhere}
+.notebook-event-content a:hover,.notebook-event-content a:focus-visible{text-decoration-thickness:2px}
+
 .notebook-event-content{min-height:140px;max-height:360px;overflow:auto;
  border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-3);
  background:var(--surface);color:var(--text)}

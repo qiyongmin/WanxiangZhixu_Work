@@ -76,7 +76,6 @@ export function QuickAccess({ node, inherited = false }: { node: NodeDTO; inheri
   const [opening, setOpening] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [pendingRemove, setPendingRemove] = useState<string | null>(null);
-  const [info, setInfo] = useState<string | null>(null);
   const items = node.resourceLinks ?? [];
   const originalShortcut=items.find(item=>item.id===draft.editing);
   const dirty=!inherited&&editing&&(draft.editing
@@ -146,7 +145,7 @@ export function QuickAccess({ node, inherited = false }: { node: NodeDTO; inheri
     const entry: ResourceLink = { id: draft.editing ?? newId(), title, target, kind: draft.kind };
     const next = draft.editing ? items.map((item) => item.id === draft.editing ? entry : item) : [...items, entry];
     if (await changes(next)) {
-      setEditing(false);setManagerOpen(false);setDraft({ ...BLANK });setInfo(null);
+      setEditing(false);setManagerOpen(false);setDraft({ ...BLANK });
     }
   };
   const remove = async (id: string) => {
@@ -155,7 +154,7 @@ export function QuickAccess({ node, inherited = false }: { node: NodeDTO; inheri
     }
   };
   const open = async (id: string) => {
-    setOpening(id);setError(null);setInfo(null);
+    setOpening(id);setError(null);
     try {
       const response = await fetch('/api/work-hub/open-folder', {
         method: 'POST',
@@ -166,7 +165,7 @@ export function QuickAccess({ node, inherited = false }: { node: NodeDTO; inheri
         const payload = await response.json().catch(() => ({})) as {error?: string};
         throw Error(payload.error ?? `HTTP ${response.status}`);
       }
-      setInfo('Requested Windows File Explorer on the computer running KB_Work. If the window is not visible, use Copy path.');
+      announce('Requested Windows File Explorer on the computer running KB_Work.');
     } catch (err) {
       setError(`Could not open this folder on the Windows host. ${err instanceof Error ? err.message : 'Please copy the path instead.'}`);
     } finally { setOpening(null); }
@@ -174,16 +173,15 @@ export function QuickAccess({ node, inherited = false }: { node: NodeDTO; inheri
   const copyPath = async (path: string) => {
     try {
       await navigator.clipboard.writeText(path);
-      setInfo('Path copied. Paste it into Windows File Explorer’s address bar.');
+      announce('Path copied to clipboard.');
       setError(null);
     } catch {
-      setInfo(null);
       setError('Clipboard access is unavailable. Select and copy the path shown in the shortcut instead.');
     }
   };
   const startEdit = (entry?: ResourceLink) => {
     setDraft(entry ? { kind: entry.kind, title: entry.title, target: entry.target, editing: entry.id } : { ...BLANK });
-    setEditing(true);setManagerOpen(true);setError(null);setInfo(null);
+    setEditing(true);setManagerOpen(true);setError(null);
   };
   const cancel = () => {setEditing(false);setDraft({ ...BLANK });setError(null);};
   const closeManager = () => {
@@ -314,8 +312,11 @@ export function QuickAccess({ node, inherited = false }: { node: NodeDTO; inheri
         ) : null}
         </div>
       </OverlayDialog> : null}
-      {info ? <p className="l1-shortcut-feedback" role="status">{info}</p> : null}
-      {error ? <p className="error-text l1-shortcut-feedback" role="alert">{error}</p> : null}
+      {error ? <div className="error-text l1-shortcut-feedback" role="alert">
+        {error}
+        <button type="button" className="btn" aria-label="Dismiss Quick Access error"
+          onClick={() => setError(null)}>×</button>
+      </div> : null}
     </section>
   );
 }

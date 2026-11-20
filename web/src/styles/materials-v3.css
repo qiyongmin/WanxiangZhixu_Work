@@ -12,6 +12,9 @@
 .materials-v3-search input{min-width:0;flex:1;outline:0;border:0;background:transparent;color:var(--text);padding:8px}
 .materials-v3-batch{display:flex;align-items:center;flex-wrap:wrap;gap:8px;padding:10px;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg-subtle);font-size:var(--fs-compact)}
 .materials-v3-info{margin:0;padding:8px 12px;background:var(--accent-bg);color:var(--accent-text);border-radius:var(--radius)}
+.materials-v3-feedback{display:flex;align-items:center;gap:8px;min-width:0}
+.materials-v3-feedback>span{flex:1;min-width:0;overflow-wrap:anywhere}
+.materials-v3-feedback>button{flex:none;min-width:28px;min-height:28px;padding:2px 6px}
 .materials-v3-workspace{display:grid;position:relative;grid-template-columns:minmax(0,1fr);gap:12px;min-width:0;align-items:start}
 .materials-v3-workspace.has-preview{grid-template-columns:minmax(0,var(--materials-list-ratio,55%)) minmax(0,1fr)}
 .materials-v3-resizer{position:absolute;left:calc(var(--materials-list-ratio,55%) + 1px);top:0;bottom:0;width:10px;z-index:15;cursor:col-resize;touch-action:none;border-radius:var(--radius)}
@@ -83,6 +86,7 @@
   background:var(--bg-subtle);
 }
 .materials-v3-row-actions .material-icon-btn{border-radius:var(--radius)}
+.materials-v3-row-actions .material-icon-btn.material-native-open{width:auto;height:auto;min-width:110px;padding:5px 9px}
 .materials-v3-row-actions .materials-v3-unlink:hover,.materials-v3-row-actions .materials-v3-unlink:focus-visible{color:var(--st-blocked-fg);background:var(--st-blocked-bg);border-color:var(--st-blocked-fg)}
 
 .materials-v3-more{position:relative}
@@ -132,7 +136,7 @@
 @container (max-width:430px){
   .materials-v3-rows .materials-v3-row{flex-wrap:wrap;gap:var(--sp-1) var(--sp-2)}
   .materials-v3-rows .materials-v3-file-info{flex:1 1 calc(100% - 70px);min-width:0}
-  .materials-v3-rows .materials-v3-row-actions{flex:1 1 100%;justify-content:flex-end}
+  .materials-v3-rows .materials-v3-row-actions{flex:1 1 100%;justify-content:flex-end;flex-wrap:wrap}
   .materials-v3-rows .materials-v3-card-tags{gap:var(--sp-1)}
   .materials-v3-rows .materials-v3-row>.material-format-icon{flex:0 0 36px;width:36px;height:40px}
 }

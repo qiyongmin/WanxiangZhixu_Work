@@ -361,7 +361,7 @@ class VideoRangeHandler(http.server.SimpleHTTPRequestHandler):
         except (ValueError,KeyError,TypeError,UnicodeError,binascii.Error) as exc:self._send_json(400,{'ok':False,'error':str(exc)})
         except (OSError,sqlite3.DatabaseError):self._send_json(500,{'ok':False,'error':'Work data could not be saved'})
 
-    def file_reveal_post(self):
+    def file_reveal_post(self, native=False):
         if not self._work_hub_write_allowed():
             self._send_json(403,{'ok':False,'error':'Trusted local UI required'});return
         try:
@@ -371,7 +371,8 @@ class VideoRangeHandler(http.server.SimpleHTTPRequestHandler):
             request=json.loads(self.rfile.read(length))
             if not isinstance(request,dict) or set(request)!={'fileId'}:
                 raise ValueError('Expected stable File ID only')
-            result=work_file_open.reveal(request['fileId'])
+            result=(work_file_open.open_native(request['fileId']) if native
+                    else work_file_open.reveal(request['fileId']))
             self._send_json(200,{'ok':True,'data':result})
         except NotImplementedError as exc:
             self._send_json(501,{'ok':False,'error':str(exc)})
@@ -829,6 +830,8 @@ class VideoRangeHandler(http.server.SimpleHTTPRequestHandler):
             self.work_hub_agent_post()
         elif request_path == '/api/file-hub/open-location':
             self.file_reveal_post()
+        elif request_path == '/api/file-hub/open-native':
+            self.file_reveal_post(native=True)
         elif request_path in ('/api/file-hub','/api/file-hub/upload'):
             self.file_hub_post(upload=request_path.endswith('/upload'))
         elif request_path in ('/api/work-hub/preview','/api/work-hub/apply'):

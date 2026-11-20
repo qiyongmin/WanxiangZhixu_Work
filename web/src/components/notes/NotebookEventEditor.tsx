@@ -3,6 +3,7 @@ import { post } from '../../lib/api';
 import { describeError } from '../../lib/errors';
 import { permanentlyDeleteNotebookItem } from '../../lib/notebookPurge';
 import { registerEditor, notifyDraftChange } from '../../lib/draftGuard';
+import { linkifyEventPaste, linkifyEventSummaryHtml } from '../../lib/eventSummaryLinks';
 import type { TreeView } from '../../lib/types';
 import type { EventEntry } from './NotebookV3';
 
@@ -18,7 +19,12 @@ export function NotebookEventEditor({
   const [day,setDay]=useState(event.event_date);
   const [time,setTime]=useState(event.event_time??'');
   const [tz,setTz]=useState(event.timezone??Intl.DateTimeFormat().resolvedOptions().timeZone??'UTC');
-  const [summary,setSummary]=useState(event.summary_html??'');
+  const [summary,setSummary]=useState(() => {
+    const result=linkifyEventSummaryHtml(event.summary_html??'');
+    return result.ok?result.html:'';
+  });
+  const initialSummary=useRef(summary);
+  const summaryRef=useRef<HTMLDivElement>(null);
   const [taskIds,setTaskIds]=useState<string[]>(event.taskIds??[]);
   const [pageIds,setPageIds]=useState<string[]>(event.pageIds??[]);
   const [dirty,setDirty]=useState(false);
@@ -34,6 +40,9 @@ export function NotebookEventEditor({
     if(!dirtyRef.current)return true;
     if(busy)return false;
     const data=dataRef.current;
+    const normalized=linkifyEventSummaryHtml(summaryRef.current?.innerHTML??data.summary);
+    if(!normalized.ok){setError('Event Summary contains unsupported HTML. Nothing was saved.');return false;}
+    data.summary=normalized.html;
     setBusy(true);setError('');
     try{
       const res=await post<{event:EventEntry}>('notebook-event-save',{
@@ -51,6 +60,36 @@ export function NotebookEventEditor({
     finally{setBusy(false);}
   };
   saveRef.current=save;
+  const normalizeSummary=()=>{
+    const editor=summaryRef.current;
+    if(!editor)return;
+    const result=linkifyEventSummaryHtml(editor.innerHTML);
+    if(!result.ok){setError('Event Summary contains unsupported HTML.');return;}
+    if(editor.innerHTML!==result.html){
+      editor.innerHTML=result.html;
+      setSummary(result.html);
+      changed();
+    }
+  };
+  const pasteSummary=(clipboard:DataTransfer)=>{
+    const editor=summaryRef.current;
+    if(!editor)return;
+    const result=linkifyEventPaste(clipboard.getData('text/plain'));
+    if(!result.ok){setError('Unable to paste Event Summary safely.');return;}
+    const selection=window.getSelection();
+    const range=selection?.rangeCount&&editor.contains(selection.anchorNode)
+      ?selection.getRangeAt(0):null;
+    if(range){
+      range.deleteContents();
+      const fragment=range.createContextualFragment(result.html);
+      const last=fragment.lastChild;
+      range.insertNode(fragment);
+      if(last){range.setStartAfter(last);range.collapse(true);
+        selection?.removeAllRanges();selection?.addRange(range);}
+    }else editor.insertAdjacentHTML('beforeend',result.html);
+    setSummary(editor.innerHTML);
+    changed();
+  };
   useEffect(()=>registerEditor('notebook-event:'+event.id,{
     dirty:()=>dirtyRef.current,
     save:()=>saveRef.current(),
@@ -97,15 +136,19 @@ export function NotebookEventEditor({
       {time?<label>Timezone <input value={tz} placeholder="IANA timezone, e.g. Europe/Stockholm"
         onChange={e=>{setTz(e.target.value);changed();}}/></label>:null}
       <div className="notebook-event-summary">
-        <strong>Summary</strong>
-        <div role="textbox" aria-label="Event Summary" aria-multiline="true" contentEditable
+        <div className="notebook-event-summary-heading"><strong>Summary</strong>
+          <span>支持直接粘贴网址 · 点击链接在新标签页打开</span></div>
+        <div ref={summaryRef} role="textbox" aria-label="Event Summary" aria-multiline="true" contentEditable
           suppressContentEditableWarning className="summary-html notebook-event-content"
-          dangerouslySetInnerHTML={{__html:event.summary_html??''}}
+          dangerouslySetInnerHTML={{__html:initialSummary.current}}
           onInput={e=>{setSummary(e.currentTarget.innerHTML);changed();}}
-          onPaste={e=>{e.preventDefault();
-            const text=e.clipboardData.getData('text/plain');
-            if(typeof document.execCommand==='function')document.execCommand('insertText',false,text);
-          }}/>
+          onBlur={normalizeSummary}
+          onClick={e=>{
+            const target=e.target;
+            const link=target instanceof Element?target.closest('a[href]'):null;
+            if(link){e.preventDefault();window.open((link as HTMLAnchorElement).href,'_blank','noopener,noreferrer');}
+          }}
+          onPaste={e=>{e.preventDefault();pasteSummary(e.clipboardData);}}/>
       </div>
     </div>
     <div className="notebook-event-relations">
